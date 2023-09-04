@@ -69,12 +69,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     func connectUser(username: String) {
-        guard let token = tokens[username] else {
-            print("Sorry, we don't recognize this username")
-            return
-        }
-        
-        ChatClient.shared.connectUser(userInfo: UserInfo(id: username, name: username), token: Token(stringLiteral: token)) { error in
+        ChatClient.shared.connectUser(userInfo: UserInfo(id: username, name: username), token: .development(userId: username)) { error in
             if let error = error {
                 print("ERROR CONNECTING USER: \(error.localizedDescription)")
                 return

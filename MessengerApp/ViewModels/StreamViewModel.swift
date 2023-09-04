@@ -71,7 +71,6 @@ final class StreamViewModel: ObservableObject {
     }
     
     func signIn(username: String, completion: @escaping (Bool) -> ()) {
-        
         ChatClient.shared.connectUser(userInfo: UserInfo(id: username), token: .development(userId: username)) { error in
             if let error = error {
                 self.errorMsg = error.localizedDescription
