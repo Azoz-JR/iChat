@@ -60,7 +60,7 @@ struct CreateNewGroup: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         DispatchQueue.main.async {
-                            streamViewModel.createChannel()
+                            streamViewModel.createGroupChannel()
                         }
                     } label: {
                         Text("Create")

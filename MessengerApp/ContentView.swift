@@ -11,9 +11,7 @@ import StreamChatSwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var streamViewModel: StreamViewModel
-    
-    @State private var text = ""
-    
+        
     var body: some View {
         TabView {
             ChatChannelsListView(type: .messaging)

@@ -19,7 +19,6 @@ extension ChatClient {
 @MainActor
 final class StreamViewModel: ObservableObject {
         
-    @Published var userName = ""
     @Published var showSignInView = false
     
     //Error Alert Variables
@@ -32,16 +31,16 @@ final class StreamViewModel: ObservableObject {
     @Published var searchResults: [ChatUser] = []
     @Published var suggestedUsers: [ChatUser] = []
     
+    //Loading View State
     @Published var isLoading = false
     
     @Published var showingProfile = false
     
-    //Create new channel...
-    @Published var channelName = ""
-    @Published var createNewChannel = false
+    //Create new group channel...
     @Published var newGroupUsers: [ChatUser] = []
     @Published var newGroupName = ""
     
+    //Application Navigation bar display mode
     @Published var navBarDisplayMode: NavigationBarItem.TitleDisplayMode = .large
     
     
@@ -50,7 +49,9 @@ final class StreamViewModel: ObservableObject {
     @Published var selectedChannelController: ChatChannelController? = nil
     @Published var selectedChannelViewModel: ChatChannelViewModel? = nil
     
+    //Loading Online users for the online users view
     @Published var onlineUsers: [ChatUser] = []
+    
     
     var isSignedIn: Bool {
         ChatClient.shared.currentUserId != nil
@@ -60,9 +61,20 @@ final class StreamViewModel: ObservableObject {
         ChatClient.shared.currentUserId
     }
     
+    
     func signOut() {
         if currentUser != nil {
-            ChatClient.shared.disconnect {
+            
+            withAnimation {
+                isLoading = true
+            }
+            
+            ChatClient.shared.disconnect { [weak self] in
+                
+                withAnimation {
+                    self?.isLoading = false
+                }
+                
                 print("Client Disconnected")
             }
         } else {
@@ -71,10 +83,20 @@ final class StreamViewModel: ObservableObject {
     }
     
     func signIn(username: String, completion: @escaping (Bool) -> ()) {
-        ChatClient.shared.connectUser(userInfo: UserInfo(id: username), token: .development(userId: username)) { error in
+        
+        withAnimation {
+            isLoading = true
+        }
+        
+        ChatClient.shared.connectUser(userInfo: UserInfo(id: username), token: .development(userId: username)) { [weak self] error in
+            
+            withAnimation {
+                self?.isLoading = false
+            }
+            
             if let error = error {
-                self.errorMsg = error.localizedDescription
-                self.error.toggle()
+                self?.errorMsg = error.localizedDescription
+                self?.error.toggle()
                 return
             }
             
@@ -83,25 +105,31 @@ final class StreamViewModel: ObservableObject {
         }
     }
         
-    func createChannel() {
-        guard let current = currentUser, !newGroupName.isEmpty else {
-            self.errorMsg = "User isn't logged in"
+    func createGroupChannel() {
+        guard !newGroupUsers.isEmpty, !newGroupName.isEmpty else {
+            self.errorMsg = "You have to write a group name"
             self.error.toggle()
             return
+        }
+        
+        withAnimation {
+            isLoading = true
         }
         
         let members: [String] = newGroupUsers.map { user in
             user.id.description
         }
-        
-        let keys: [String] = tokens.keys.filter({ $0 != current  && members.contains($0)}).map { $0 }
-        
+                
         let channelId = ChannelId(type: .team, id: newGroupName)
         
         do {
-            let request = try ChatClient.shared.channelController(createChannelWithId: channelId, name: newGroupName, imageURL: nil, members: Set(keys), isCurrentUserMember: true)
-            
+            let request = try ChatClient.shared.channelController(createChannelWithId: channelId, name: newGroupName, imageURL: nil, members: Set(members), isCurrentUserMember: true)
+                        
             request.synchronize { [weak self] error in
+                
+                withAnimation {
+                    self?.isLoading = false
+                }
                 
                 if let error = error {
                     self?.errorMsg = error.localizedDescription
@@ -177,8 +205,6 @@ final class StreamViewModel: ObservableObject {
         controller.synchronize { [weak self] error in
             if let error = error {
                 print("ERROR SEARCHING FOR USER: \(error.localizedDescription)")
-                self?.errorMsg = "ERROR SEARCHING FOR USER: \(error.localizedDescription)"
-                self?.error.toggle()
                 return
             }
             
@@ -189,8 +215,6 @@ final class StreamViewModel: ObservableObject {
             controller.loadNextUsers(limit: 10) { error in
                 if let error = error {
                     print("ERROR SEARCHING FOR NEXT USERS: \(error.localizedDescription)")
-                    self?.errorMsg = "ERROR SEARCHING FOR USER: \(error.localizedDescription)"
-                    self?.error.toggle()
                     return
                 }
                 
@@ -210,8 +234,6 @@ final class StreamViewModel: ObservableObject {
         controller.synchronize { [weak self] error in
             if let error = error {
                 print("ERROR LOADING SUGGESTED USERS: \(error.localizedDescription)")
-                self?.errorMsg = "ERROR LOADING SUGGESTED USERS: \(error.localizedDescription)"
-                self?.error.toggle()
                 return
             }
             
@@ -233,13 +255,10 @@ final class StreamViewModel: ObservableObject {
         controller.synchronize { [weak self] error in
             if let error = error {
                 print("ERROR QUERYING ONLINE USERS: \(error.localizedDescription)")
-                self?.errorMsg = "ERROR QUERYING ONLINE USERS: \(error.localizedDescription)"
-                self?.error.toggle()
                 return
             }
             
             print("QUERIED FIRST PAGE SUCCESSFULLY")
-            print("ONLINE COUNT: \(controller.users.count)")
             self?.onlineUsers = controller.users.filter { ($0.id.description != self?.currentUser) }
         }
     }

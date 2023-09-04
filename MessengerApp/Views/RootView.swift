@@ -10,9 +10,7 @@ import SwiftUI
 struct RootView: View {
     
     @EnvironmentObject var streamViewModel: StreamViewModel
-    
-    @State private var showSignInView = false
-    
+        
     var body: some View {
         ZStack {
             if !streamViewModel.showSignInView {

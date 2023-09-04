@@ -29,25 +29,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         ChatClient.shared = chatClient
         
-        //Changing colors, fonts, images, channelNamer
-        /*
-        var colors = ColorPalette()
-        colors.tintColor = Color(.streamBlue)
-
-        var fonts = Fonts()
-        fonts.footnoteBold = Font.footnote
-
-        let images = Images()
-        images.reactionLoveBig = UIImage(systemName: "heart.fill")!
-
-        let appearance = Appearance(colors: colors, images: images, fonts: fonts)
-
-        let channelNamer: ChatChannelNamer = { channel, currentUserId in
-            "This is our custom name: \(channel.name ?? "no name")"
-        }
-        let utils = Utils(channelNamer: channelNamer)
-         */
-        
         var colors = ColorPalette()
         colors.messageCurrentUserBackground = [UIColor(Color("AppBlue"))]
         colors.messageCurrentUserTextColor = UIColor(.white)

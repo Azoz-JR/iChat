@@ -13,7 +13,7 @@ struct DirectChatChannelView: View {
     @EnvironmentObject var streamViewModel: StreamViewModel
     
     @Environment(\.dismiss) var dismiss
-    
+        
     var body: some View {
         NavigationStack {
             Group {
@@ -23,7 +23,23 @@ struct DirectChatChannelView: View {
                                         , channelController: channelController)
                     )
                 } else {
-                    Text("SOMETHING WENT WRONG!!!!")
+                    VStack(spacing: 20) {
+                        Text("OPENNING A DIRECT CHANNEL WENT WRONG!")
+                        
+                        Button {
+                            dismiss()
+                        } label: {
+                            Text("Back")
+                                .font(.headline.bold())
+                                .foregroundColor(.white)
+                                .frame(width: 100, height: 50)
+                                .clipShape(Capsule(style: .continuous))
+                                .background {
+                                    Capsule().fill(Color("AppBlue"))
+                                }
+                                
+                        }
+                    }
                 }
             }
         }

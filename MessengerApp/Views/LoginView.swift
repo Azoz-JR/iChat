@@ -71,7 +71,6 @@ struct LoginView: View {
             } message: {
                 Text(streamViewModel.errorMsg)
             }
-            .environmentObject(streamViewModel)
         }
     }
 }
