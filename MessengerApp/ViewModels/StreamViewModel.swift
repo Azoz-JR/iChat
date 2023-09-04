@@ -83,24 +83,6 @@ final class StreamViewModel: ObservableObject {
             completion(error == nil)
         }
     }
-    
-//    func signUp(username: String, completion: @escaping (Bool) -> ()) {
-//        ChatClient.shared.connectUser(userInfo: UserInfo(id: username, name: username)) { result in
-//            switch result {
-//            case result(.success(let token)):
-//                tokens[username] = token
-//
-//                print("\(username) LOGGED IN SUCCESSFULLY!")
-//                completion(error == nil)
-//            case result(.failure(let error)):
-//                self.errorMsg = error.localizedDescription
-//                self.error.toggle()
-//
-//                completion(error == nil)
-//                return
-//            }
-//        }
-//    }
         
     func createChannel() {
         guard let current = currentUser, !newGroupName.isEmpty else {
