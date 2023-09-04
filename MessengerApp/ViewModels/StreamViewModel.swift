@@ -71,11 +71,6 @@ final class StreamViewModel: ObservableObject {
     }
     
     func signIn(username: String, completion: @escaping (Bool) -> ()) {
-//        guard let token = tokens[username] else {
-//            self.errorMsg = "Sorry, we don't recognize this username"
-//            self.error.toggle()
-//            return
-//        }
         
         ChatClient.shared.connectUser(userInfo: UserInfo(id: username), token: .development(userId: username)) { error in
             if let error = error {
@@ -87,18 +82,6 @@ final class StreamViewModel: ObservableObject {
             print("\(username) LOGGED IN SUCCESSFULLY!")
             completion(error == nil)
         }
-        
-//        ChatClient.shared.connectUser(userInfo: UserInfo(id: username, name: username), token: Token(stringLiteral: token)) { error in
-//            if let error = error {
-//                self.errorMsg = error.localizedDescription
-//                self.error.toggle()
-//                return
-//            }
-//
-//            print("\(username) LOGGED IN SUCCESSFULLY!")
-//            completion(error == nil)
-//        }
-        
     }
     
 //    func signUp(username: String, completion: @escaping (Bool) -> ()) {
