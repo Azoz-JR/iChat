@@ -5,11 +5,14 @@
 //  Created by Azoz Salah on 31/07/2023.
 //
 
+import StreamChatSwiftUI
 import SwiftUI
 
 struct ProfileView: View {
     
     @EnvironmentObject var streamViewModel: StreamViewModel
+    
+    @State private var imageURL: URL?
     
     var body: some View {
         VStack(spacing: 0) {
@@ -38,18 +41,35 @@ struct ProfileView: View {
             ScrollView {
                 
                 Spacer(minLength: 10)
-                
-                Image("profile")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 200, height: 200)
-                    .clipShape(Circle())
-                    .background {
-                        Circle()
-                            .stroke(.primary, lineWidth: 0.2)
+                Button {
+                    streamViewModel.showingchangeProfilePictureSheet = true
+                } label: {
+                    ZStack(alignment: .bottomTrailing) {
+                        MessageAvatarView(avatarURL: streamViewModel.imageURL, size: CGSize(width: 100, height: 100))
+                            .scaledToFit()
+                            .clipShape(Circle())
+                            .background {
+                                Circle()
+                                    .stroke(.primary, lineWidth: 0.2)
+                            }
+                            .zIndex(0)
+                        
+                        ZStack(alignment: .center) {
+                            Circle()
+                                .frame(width: 45, height: 45)
+                                .foregroundColor(.white)
+                            
+                            Image(systemName: "camera.fill")
+                                .foregroundColor(.primary)
+                                .frame(width: 35, height: 35)
+                                .background {
+                                    Circle().fill(.gray.opacity(0.2))
+                                }
+                        }
                     }
+                }
                 
-                Text(streamViewModel.currentUser ?? "User")
+                Text(streamViewModel.currentUserId ?? "User")
                     .font(.title.bold())
                 
                 Button {
@@ -69,12 +89,15 @@ struct ProfileView: View {
                         .background {
                             RoundedRectangle(cornerRadius: 30)
                                 .fill(Color("AppBlue"))
-                                .shadow(radius: 5)
                         }
                 }
             }
         }
         .vSpacing(.top)
+        .sheet(isPresented: $streamViewModel.showingchangeProfilePictureSheet) {
+            ImagePicker()
+        }
+
     }
 }
 

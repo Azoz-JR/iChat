@@ -26,9 +26,7 @@ public struct CustomChannelHeader: ToolbarContent {
             Button {
                 streamViewModel.showingProfile = true
             } label: {
-                Image("profile")
-                    .resizable()
-                    .scaledToFill()
+                MessageAvatarView(avatarURL: streamViewModel.imageURL)
                     .modifier(CircleImageModifier())
             }
         }

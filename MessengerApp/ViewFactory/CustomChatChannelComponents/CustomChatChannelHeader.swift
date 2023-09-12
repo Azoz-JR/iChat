@@ -12,7 +12,6 @@ import SwiftUI
 
 public struct CustomChatChannelHeader: ToolbarContent {
     
-    public var channelName: String
     public var channel: ChatChannel
     
     @Binding var showingChannelInfo: Bool
@@ -33,13 +32,33 @@ public struct CustomChatChannelHeader: ToolbarContent {
         return date
     }
     
+    func channelName() -> String {
+        let channelMembers = channel.lastActiveMembers.filter { $0.id != ChatClient.shared.currentUserId }
+        
+        guard let channelName = channelMembers.first?.id else {
+            return "UNKNOWN"
+        }
+        
+        return channelName
+    }
+    
+    func channelImage() -> URL? {
+        guard channel.imageURL == nil else {
+            return channel.imageURL
+        }
+        
+        let image = channel.lastActiveMembers.filter { $0.id != ChatClient.shared.currentUserId }.first?.imageURL
+        
+        return image
+    }
+    
     @Environment(\.dismiss) var dismiss
     @State private var isShowingChannelInfo = false
     
     public var body: some ToolbarContent {
         ToolbarItem(placement: .principal) {
             VStack(alignment: .center) {
-                Text(channelName)
+                Text(channelName())
                     .font(.headline)
                     .foregroundColor(.white)
                 
@@ -68,7 +87,7 @@ public struct CustomChatChannelHeader: ToolbarContent {
             Button {
                 showingChannelInfo = true
             } label: {
-                MessageAvatarView(avatarURL: channel.imageURL)
+                MessageAvatarView(avatarURL: channel.imageURL != nil ? channel.imageURL : channelImage())
             }
         }
     }
@@ -85,7 +104,7 @@ struct CustomChatChannelModifier: ChatChannelHeaderViewModifier {
         content
             .navigationBarBackButtonHidden()
             .toolbar {
-                CustomChatChannelHeader(channelName: channel.name ?? "UNKNOWN", channel: channel, showingChannelInfo: $showingChannelInfo)
+                CustomChatChannelHeader(channel: channel, showingChannelInfo: $showingChannelInfo)
             }
             .sheet(isPresented: $showingChannelInfo) {
                 NavigationStack {

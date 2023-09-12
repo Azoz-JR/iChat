@@ -17,7 +17,7 @@ struct CreateNewGroup: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            SearchBar(text: $streamViewModel.searchText, barColor: Color(hex: 0xf8f9fa), prompt: "Search users")
+            SearchBar(text: $streamViewModel.searchText, barColor: Color("ListRowBackground"), prompt: "Search users")
                 .padding(.horizontal, 10)
                 .padding(.top, 10)
             
@@ -25,7 +25,7 @@ struct CreateNewGroup: View {
                 Section {
                     TextField("Group Name", text: $streamViewModel.newGroupName)
                 }
-                .listRowBackground(Color(hex: 0xf8f9fa))
+                .listRowBackground(Color("ListRowBackground"))
                 
                 Group {
                     if streamViewModel.searchText.isEmpty {
@@ -41,7 +41,7 @@ struct CreateNewGroup: View {
                 .alignmentGuide(.listRowSeparatorLeading) { d in
                     d[.leading]
                 }
-                .listRowBackground(Color(hex: 0xf8f9fa))
+                .listRowBackground(Color("ListRowBackground"))
             }
             .navigationTitle("New Group")
             .navigationBarTitleDisplayMode(.inline)
@@ -84,7 +84,7 @@ struct CreateNewGroup: View {
                 DirectChatChannelView()
         }
         }
-        .background(Color(hex: 0xe9ecef))
+        .background(Color("ListBackground"))
     }
 }
 

@@ -17,7 +17,7 @@ struct SearchUsersView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            SearchBar(text: $streamViewModel.searchText, barColor: Color(hex: 0xf8f9fa), prompt: "Search users")
+            SearchBar(text: $streamViewModel.searchText, barColor: Color("ListRowBackground"), prompt: "Search users")
                 .padding(.horizontal, 10)
                 .padding(.top, 10)
             
@@ -33,7 +33,7 @@ struct SearchUsersView: View {
                         }
                     }
                 }
-                .listRowBackground(Color(hex: 0xf8f9fa))
+                .listRowBackground(Color("ListRowBackground"))
                 
                 Group {
                     if streamViewModel.searchText.isEmpty {
@@ -49,7 +49,7 @@ struct SearchUsersView: View {
                 .alignmentGuide(.listRowSeparatorLeading) { d in
                     d[.leading]
                 }
-                .listRowBackground(Color(hex: 0xf8f9fa))
+                .listRowBackground(Color("ListRowBackground"))
             }
             .navigationTitle("New Message")
             .navigationBarTitleDisplayMode(.inline)
@@ -86,7 +86,7 @@ struct SearchUsersView: View {
                 DirectChatChannelView()
         }
         }
-        .background(Color(hex: 0xe9ecef))
+        .background(Color("ListBackground"))
         
     }
 }

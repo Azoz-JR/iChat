@@ -42,9 +42,6 @@ struct MessengerAppApp: App {
                         UINavigationBar.appearance().backIndicatorImage = image
                         UINavigationBar.appearance().backIndicatorTransitionMaskImage = image
                     }
-                    
-                    streamViewModel.loadOnlineUsers()
-                    streamViewModel.loadSuggestedResults()
                 }
         }
     }

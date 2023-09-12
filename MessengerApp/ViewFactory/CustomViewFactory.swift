@@ -81,12 +81,12 @@ class CustomViewFactory: ViewFactory {
         }
     }
     
-    func makeMessageListBackground(colors: ColorPalette, isInThread: Bool) -> some View {
-        Color("AppBlue").opacity(0.1)
-            .onAppear {
-                self.navBarDisplayMode = .inline
-            }
-    }
+//    func makeMessageListBackground(colors: ColorPalette, isInThread: Bool) -> some View {
+//        Color("AppBlue").opacity(0.1)
+//            .onAppear {
+//                self.navBarDisplayMode = .inline
+//            }
+//    }
     
     func makeComposerViewModifier() -> some ViewModifier {
         ComposerBackgroundViewModifier()

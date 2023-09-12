@@ -52,29 +52,33 @@ final class StreamViewModel: ObservableObject {
     //Loading Online users for the online users view
     @Published var onlineUsers: [ChatUser] = []
     
+    @Published var showingchangeProfilePictureSheet = false
     
     var isSignedIn: Bool {
         ChatClient.shared.currentUserId != nil
     }
     
-    var currentUser: String? {
+    var currentUserId: String? {
         ChatClient.shared.currentUserId
+    }
+    
+    var currentUser: CurrentChatUser? {
+        ChatClient.shared.currentUserController().currentUser
+    }
+    
+    var imageURL: URL? {
+        guard let fileName = currentUserId else {
+            return nil
+        }
+        
+        return FileManager.documnetsDirectory.appending(path: "\(fileName).jpg")
     }
     
     
     func signOut() {
-        if currentUser != nil {
-            
-            withAnimation {
-                isLoading = true
-            }
-            
-            ChatClient.shared.disconnect { [weak self] in
-                
-                withAnimation {
-                    self?.isLoading = false
-                }
-                
+        if currentUserId != nil {
+        
+            ChatClient.shared.disconnect {
                 print("Client Disconnected")
             }
         } else {
@@ -84,15 +88,7 @@ final class StreamViewModel: ObservableObject {
     
     func signIn(username: String, completion: @escaping (Bool) -> ()) {
         
-        withAnimation {
-            isLoading = true
-        }
-        
         ChatClient.shared.connectUser(userInfo: UserInfo(id: username), token: .development(userId: username)) { [weak self] error in
-            
-            withAnimation {
-                self?.isLoading = false
-            }
             
             if let error = error {
                 self?.errorMsg = error.localizedDescription
@@ -157,7 +153,7 @@ final class StreamViewModel: ObservableObject {
     }
     
     func createDirectChannel(id: String) {
-        guard currentUser != nil, !id.isEmpty else {
+        guard currentUserId != nil, !id.isEmpty else {
             self.errorMsg = "User isn't logged in"
             self.error.toggle()
             return
@@ -168,7 +164,7 @@ final class StreamViewModel: ObservableObject {
         }
         
         do {
-            let request = try ChatClient.shared.channelController(createDirectMessageChannelWith: Set([id]), type: .messaging, isCurrentUserMember: true, name: id, extraData: [:])
+            let request = try ChatClient.shared.channelController(createDirectMessageChannelWith: Set([id]), type: .messaging, isCurrentUserMember: true, extraData: [:])
             
             request.synchronize { [weak self] error in
                 withAnimation {
@@ -210,7 +206,7 @@ final class StreamViewModel: ObservableObject {
             
             print("SEARCHED FIRST PAGE SUCCESSFULLY")
             
-            self?.searchResults = controller.users.filter { $0.id.description != self?.currentUser}
+            self?.searchResults = controller.users.filter { $0.id.description != self?.currentUserId}
             
             controller.loadNextUsers(limit: 10) { error in
                 if let error = error {
@@ -218,7 +214,7 @@ final class StreamViewModel: ObservableObject {
                     return
                 }
                 
-                self?.searchResults = controller.users.filter { $0.id.description != self?.currentUser}
+                self?.searchResults = controller.users.filter { $0.id.description != self?.currentUserId}
                 print("SEARCHED SECOND PAGE SUCCESSFULLY")
             }
         }
@@ -239,7 +235,7 @@ final class StreamViewModel: ObservableObject {
             
             print("LOADED SUGGESTED USERS SUCCESSFULLY")
             
-            self?.suggestedUsers = controller.users.filter { $0.id.description != self?.currentUser}
+            self?.suggestedUsers = controller.users.filter { $0.id.description != self?.currentUserId}
         }
     }
     
@@ -259,7 +255,7 @@ final class StreamViewModel: ObservableObject {
             }
             
             print("QUERIED FIRST PAGE SUCCESSFULLY")
-            self?.onlineUsers = controller.users.filter { ($0.id.description != self?.currentUser) }
+            self?.onlineUsers = controller.users.filter { ($0.id.description != self?.currentUserId) }
         }
     }
     

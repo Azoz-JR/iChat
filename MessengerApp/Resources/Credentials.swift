@@ -25,3 +25,5 @@ let tokens = [
     "Hassan" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiSGFzc2FuIn0.mBwRfNqmTZrYaz2vBPJZhUyZ7q-AYJhH8Daz09WvcTc",
     "Seif" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiU2VpZiJ9.mI_WQXz4oBAddc9P5Oma9mFSJZZ5xL5Rs4qSGZ98hsg"
 ]
+
+let profileImageURL = FileManager.documnetsDirectory.appending(path: "profilePicture.jpg")
