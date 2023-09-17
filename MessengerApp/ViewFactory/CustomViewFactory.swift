@@ -11,18 +11,12 @@ import StreamChatSwiftUI
 
 
 class CustomViewFactory: ViewFactory {
+    
+    static let shared = CustomViewFactory()
         
     @Injected(\.chatClient) public var chatClient
     
-    @State var navBarDisplayMode: NavigationBarItem.TitleDisplayMode
-    
-    var onlineUsers: [ChatUser]
-    
-    init(navBarDisplayMode: NavigationBarItem.TitleDisplayMode, onlineUsers: [ChatUser] = []) {
-        self.navBarDisplayMode = navBarDisplayMode
-        
-        self.onlineUsers = onlineUsers
-    }
+    private init() { }
     
     func navigationBarDisplayMode() -> NavigationBarItem.TitleDisplayMode {
         .inline
@@ -63,7 +57,7 @@ class CustomViewFactory: ViewFactory {
             SearchBar(text: searchText, barColor: Color.gray.opacity(0.2), prompt: "Search messages")
                 .padding(.top, 10)
             
-            UserOnlineView(users: onlineUsers)
+            UserOnlineView()
         }
     }
     
@@ -81,12 +75,10 @@ class CustomViewFactory: ViewFactory {
         }
     }
     
-//    func makeMessageListBackground(colors: ColorPalette, isInThread: Bool) -> some View {
-//        Color("AppBlue").opacity(0.1)
-//            .onAppear {
-//                self.navBarDisplayMode = .inline
-//            }
-//    }
+    func makeMessageListBackground(colors: ColorPalette, isInThread: Bool) -> some View {
+        Image("background")
+            .resizable(resizingMode: .tile)
+    }
     
     func makeComposerViewModifier() -> some ViewModifier {
         ComposerBackgroundViewModifier()

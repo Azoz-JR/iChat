@@ -20,4 +20,4 @@ var customTransition: AnyTransition {
 
 let messageDisplayOptions = MessageDisplayOptions(animateChanges: true, minimumSwipeGestureDistance: 50, currentUserMessageTransition: customTransition, otherUserMessageTransition: customTransition, shouldAnimateReactions: true)
 
-let messageListConfig = MessageListConfig(messageDisplayOptions: messageDisplayOptions, doubleTapOverlayEnabled: true)
+let messageListConfig = MessageListConfig(typingIndicatorPlacement: .navigationBar, messageDisplayOptions: messageDisplayOptions, doubleTapOverlayEnabled: true, showNewMessagesSeparator: true)

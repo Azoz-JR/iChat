@@ -40,10 +40,6 @@ final class StreamViewModel: ObservableObject {
     @Published var newGroupUsers: [ChatUser] = []
     @Published var newGroupName = ""
     
-    //Application Navigation bar display mode
-    @Published var navBarDisplayMode: NavigationBarItem.TitleDisplayMode = .large
-    
-    
     //Open direct channel
     @Published var showingSelectedChannel = false
     @Published var selectedChannelController: ChatChannelController? = nil

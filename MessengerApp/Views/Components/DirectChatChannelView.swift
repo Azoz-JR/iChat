@@ -19,7 +19,7 @@ struct DirectChatChannelView: View {
             Group {
                 if let channelController = streamViewModel.selectedChannelController {
                     LazyView(
-                        ChatChannelView(viewFactory: CustomViewFactory(navBarDisplayMode: .inline), viewModel: streamViewModel.selectedChannelViewModel
+                        ChatChannelView(viewFactory: CustomViewFactory.shared, viewModel: streamViewModel.selectedChannelViewModel
                                         , channelController: channelController)
                     )
                 } else {

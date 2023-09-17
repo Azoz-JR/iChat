@@ -12,14 +12,12 @@ import SwiftUI
 struct UserOnlineView: View {
     
     @EnvironmentObject var streamViewModel: StreamViewModel
-    
-    let users: [ChatUser]
-    
+        
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                if !users.isEmpty {
-                    ForEach(users) { user in
+                if !streamViewModel.onlineUsers.isEmpty {
+                    ForEach(streamViewModel.onlineUsers) { user in
                         Button {
                             DispatchQueue.main.async {
                                 streamViewModel.createDirectChannel(id: user.id.description)
@@ -62,7 +60,7 @@ struct UserOnlineView: View {
 
 struct UserOnlineView_Previews: PreviewProvider {
     static var previews: some View {
-        UserOnlineView(users: [])
+        UserOnlineView()
             .environmentObject(StreamViewModel())
     }
 }

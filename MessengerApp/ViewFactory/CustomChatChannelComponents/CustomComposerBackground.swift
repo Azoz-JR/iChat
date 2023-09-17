@@ -12,6 +12,6 @@ struct ComposerBackgroundViewModifier: ViewModifier {
     
     public func body(content: Content) -> some View {
         content
-            //.background(Color("AppBlue").opacity(0.1))
+            .background(Image("background").resizable())
     }
 }

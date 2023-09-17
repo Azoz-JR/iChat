@@ -33,7 +33,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         colors.messageCurrentUserBackground = [UIColor(Color("AppBlue"))]
         colors.messageCurrentUserTextColor = UIColor(.white)
         colors.tintColor = Color("AppBlue")
-        colors.textLowEmphasis = .secondaryLabel
+        colors.textLowEmphasis = .black
         
         let utils = Utils(messageListConfig: messageListConfig)
         

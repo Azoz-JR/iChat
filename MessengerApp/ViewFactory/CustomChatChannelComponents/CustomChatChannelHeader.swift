@@ -57,7 +57,7 @@ public struct CustomChatChannelHeader: ToolbarContent {
     
     public var body: some ToolbarContent {
         ToolbarItem(placement: .principal) {
-            VStack(alignment: .center) {
+            VStack(alignment: .center, spacing: 2) {
                 Text(channelName())
                     .font(.headline)
                     .foregroundColor(.white)

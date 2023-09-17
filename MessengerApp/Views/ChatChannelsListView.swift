@@ -24,7 +24,7 @@ struct ChatChannelsListView: View {
     
     var body: some View {
         NavigationStack {
-            ChatChannelListView(viewFactory: CustomViewFactory(navBarDisplayMode: streamViewModel.navBarDisplayMode, onlineUsers: streamViewModel.onlineUsers), viewModel: type == .messaging ? chatsViewModel : groupsViewModel, embedInNavigationView: false)
+            ChatChannelListView(viewFactory: CustomViewFactory.shared, viewModel: type == .messaging ? chatsViewModel : groupsViewModel, embedInNavigationView: false)
                 .navigationTitle(type == .messaging ? "Chats" : "Groups")
                 .navigationBarTitleDisplayMode(.large)
                 .navigationBarBackButtonHidden()
