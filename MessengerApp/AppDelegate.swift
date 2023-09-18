@@ -30,10 +30,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         ChatClient.shared = chatClient
         
         var colors = ColorPalette()
-        colors.messageCurrentUserBackground = [UIColor(Color("AppBlue"))]
-        colors.messageCurrentUserTextColor = UIColor(.white)
-        colors.tintColor = Color("AppBlue")
-        colors.textLowEmphasis = .black
+        colors.messageCurrentUserBackground = [UIColor(Color.outgoingChatBubbleColor)]
+        colors.messageCurrentUserTextColor = UIColor(Color.primaryText)
+        colors.messageOtherUserTextColor = UIColor(Color.primaryText)
+        colors.tintColor = .primaryColor
+        //colors.textLowEmphasis = UIColor(Color.secondaryText)
         
         let utils = Utils(messageListConfig: messageListConfig)
         
@@ -41,9 +42,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         streamChat = StreamChat(chatClient: ChatClient.shared, appearance: appearance, utils: utils)
         
-        guard ChatClient.shared.currentUserId == nil else {
-            connectUser(username: ChatClient.shared.currentUserId!)
-            return true
+        if let userId = ChatClient.shared.currentUserId {
+            connectUser(username: userId)
         }
         
         return true

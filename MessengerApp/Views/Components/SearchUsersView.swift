@@ -12,28 +12,28 @@ import SwiftUI
 struct SearchUsersView: View {
     
     @EnvironmentObject var streamViewModel: StreamViewModel
-    
-    @Environment(\.colorScheme) var colorScheme
-    
+        
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 5) {
             SearchBar(text: $streamViewModel.searchText, barColor: Color("ListRowBackground"), prompt: "Search users")
-                .padding(.horizontal, 10)
                 .padding(.top, 10)
             
             List {
-                Section("Create group") {
-                    NavigationLink {
-                        CreateNewGroup()
-                    } label: {
-                        HStack {
-                            Image(systemName: "person.3.fill")
-                            
-                            Text("Group Chat")
+                if streamViewModel.searchText.isEmpty {
+                    Section {
+                        NavigationLink {
+                            CreateNewGroup()
+                        } label: {
+                            HStack {
+                                Image(systemName: "person.3.fill")
+                                
+                                Text("Group Chat")
+                            }
                         }
+                    } header: {
+                        Text("Create Group")
                     }
                 }
-                .listRowBackground(Color("ListRowBackground"))
                 
                 Group {
                     if streamViewModel.searchText.isEmpty {
@@ -49,8 +49,8 @@ struct SearchUsersView: View {
                 .alignmentGuide(.listRowSeparatorLeading) { d in
                     d[.leading]
                 }
-                .listRowBackground(Color("ListRowBackground"))
             }
+            .listStyle(.grouped)
             .navigationTitle("New Message")
             .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)
@@ -73,9 +73,7 @@ struct SearchUsersView: View {
                 }
             }
             .onAppear {
-                if streamViewModel.searchText.isEmpty {
-                    streamViewModel.loadSuggestedResults()
-                }
+                streamViewModel.loadSuggestedResults()
             }
             .alert("ERROR CREATING NEW DIRECT CHANNEL...", isPresented: $streamViewModel.error) {
                 Button("OK") {}

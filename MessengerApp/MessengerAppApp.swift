@@ -18,11 +18,11 @@ struct MessengerAppApp: App {
         WindowGroup {
             RootView()
                 .environmentObject(streamViewModel)
-                .preferredColorScheme(.light)
+                //.preferredColorScheme(.light)
                 .onAppear {
                     let appearance = UITabBarAppearance()
                     appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
-                    //appearance.backgroundColor = UIColor(Color("AppBlue"))
+                    //appearance.backgroundColor = UIColor(Color.primaryColor)
 
                     UITabBar.appearance().standardAppearance = appearance
                     UITabBar.appearance().scrollEdgeAppearance = appearance
@@ -31,7 +31,7 @@ struct MessengerAppApp: App {
                     nav.largeTitleTextAttributes = [.foregroundColor: UIColor(.white)]
                     nav.titleTextAttributes = [.foregroundColor: UIColor(.white)]
                     nav.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
-                    nav.backgroundColor = UIColor(Color("AppBlue"))
+                    nav.backgroundColor = UIColor(Color.primaryColor)
                     
                     UINavigationBar.appearance().standardAppearance = nav
                     UINavigationBar.appearance().scrollEdgeAppearance = nav

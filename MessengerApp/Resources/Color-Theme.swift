@@ -18,4 +18,32 @@ extension Color {
             opacity: alpha
         )
     }
+    
+    // Replace with your primary color hex value
+    static let primaryColor = Color(hex: 0x007AFF)
+    static let backgroundColor = Color(hex: 0xF5F5F5)
+    
+    // Chat Bubble Colors
+    static let outgoingChatBubbleColor = Color("outgoingChatBubble")
+    static let incomingChatBubbleColor = Color(hex: 0xFFFFFF)
+    
+    // Text Colors
+    static let primaryText = Color("primaryText")
+    static let secondaryText = Color(hex: 0xe5e5e5)
+    
+    // Status Indicators
+    static let onlineStatusColor = Color(hex: 0x4CAF50)
+    static let offlineStatusColor = Color(hex: 0xF44336)
+    
+    // Button Colors
+    static let defaultButtonColor = Color(hex: 0x007AFF)
+    static let secondaryButtonColor = Color(hex: 0xEFEFF4)
+    
+    // Navigation Bar Color
+    static let navigationBarColor = Color(hex: 0xFFFFFF)
+    
+    //ListBackground Color
+    static let listBackgroundColor = Color("ListBackground")
+    static let listRowBackgroundColor = Color("ListRowBackground")
+    
 }

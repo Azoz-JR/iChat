@@ -10,11 +10,11 @@ import SwiftUI
 struct CustomListRowSeparator: View {
     
     let deviceWidth = UIScreen.main.bounds.width
-    let color = LinearGradient(gradient: Gradient(colors: [Color("AppBlue"), Color("ListRowBackground")]), startPoint: .topLeading, endPoint: .bottomTrailing)
+    let color = LinearGradient(gradient: Gradient(colors: [Color.primaryColor, Color("ListRowBackground")]), startPoint: .topLeading, endPoint: .bottomTrailing)
     
     var body: some View {
         Rectangle()
-            .fill(Color("AppBlue").opacity(0.4))
+            .fill(Color.primaryColor.opacity(0.4))
             .frame(width: deviceWidth, height: 0.5)
             //.blendMode(.screen)
     }

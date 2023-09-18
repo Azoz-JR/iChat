@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9718E6832AB75D81004A213C /* CustomChatChannelModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9718E6822AB75D81004A213C /* CustomChatChannelModifier.swift */; };
 		973382EC2A8FAD9D003172E7 /* CustomChatChannelHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973382EB2A8FAD9C003172E7 /* CustomChatChannelHeader.swift */; };
 		973382F02A8FD130003172E7 /* BackButtonDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973382EF2A8FD130003172E7 /* BackButtonDisplay.swift */; };
 		973382F42A8FE216003172E7 /* CircleImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973382F32A8FE216003172E7 /* CircleImageModifier.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9718E6822AB75D81004A213C /* CustomChatChannelModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChatChannelModifier.swift; sourceTree = "<group>"; };
 		973382EB2A8FAD9C003172E7 /* CustomChatChannelHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChatChannelHeader.swift; sourceTree = "<group>"; };
 		973382EF2A8FD130003172E7 /* BackButtonDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonDisplay.swift; sourceTree = "<group>"; };
 		973382F32A8FE216003172E7 /* CircleImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageModifier.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				973382EB2A8FAD9C003172E7 /* CustomChatChannelHeader.swift */,
+				9718E6822AB75D81004A213C /* CustomChatChannelModifier.swift */,
 				977FAA612AA1005C0003059C /* CustomComposerBackground.swift */,
 				973382F52A901353003172E7 /* MessageListConfig.swift */,
 			);
@@ -311,6 +314,7 @@
 				977FAA602A9FB7FD0003059C /* NewGroupListView.swift in Sources */,
 				978115052A8CE4FB00394DB7 /* EmptyPageView.swift in Sources */,
 				9781149A2A8A8F0700394DB7 /* ContentView.swift in Sources */,
+				9718E6832AB75D81004A213C /* CustomChatChannelModifier.swift in Sources */,
 				978114B52A8A8FDC00394DB7 /* Credentials.swift in Sources */,
 				978114BD2A8A903D00394DB7 /* StreamViewModel.swift in Sources */,
 				978114C72A8A90B400394DB7 /* LoadingScreen.swift in Sources */,

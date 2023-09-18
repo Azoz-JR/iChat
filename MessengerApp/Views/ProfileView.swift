@@ -23,12 +23,12 @@ struct ProfileView: View {
                     }
                 } label: {
                     Image(systemName: "arrow.left")
-                        .foregroundColor(Color("AppBlue"))
+                        .foregroundColor(Color.primaryColor)
                 }
                 
                 Text("Me")
                     .font(.largeTitle.bold())
-                    .foregroundColor(Color("AppBlue"))
+                    .foregroundColor(Color.primaryColor)
             }
             .hLeading()
             .padding(.horizontal)
@@ -60,7 +60,7 @@ struct ProfileView: View {
                                 .foregroundColor(.white)
                             
                             Image(systemName: "camera.fill")
-                                .foregroundColor(.primary)
+                                .foregroundColor(.black)
                                 .frame(width: 35, height: 35)
                                 .background {
                                     Circle().fill(.gray.opacity(0.2))
@@ -88,7 +88,7 @@ struct ProfileView: View {
                         .frame(width: 180)
                         .background {
                             RoundedRectangle(cornerRadius: 30)
-                                .fill(Color("AppBlue"))
+                                .fill(Color.primaryColor)
                         }
                 }
             }

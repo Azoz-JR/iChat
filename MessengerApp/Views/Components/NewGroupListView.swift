@@ -42,7 +42,7 @@ struct NewGroupListView: View {
                     
                     if streamViewModel.newGroupUsers.contains(user) {
                         Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(Color("AppBlue"))
+                            .foregroundColor(Color.primaryColor)
                     } else {
                         Image(systemName: "circle")
                             .foregroundColor(.primary.opacity(0.7))

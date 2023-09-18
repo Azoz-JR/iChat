@@ -17,7 +17,7 @@ struct LoginView: View {
         NavigationStack {
             ZStack {
                 RadialGradient(stops: [
-                    .init(color: Color("AppBlue"), location: 0),
+                    .init(color: Color.primaryColor, location: 0),
                     .init(color: Color(uiColor: .systemBackground), location: 0.05)
                 ], center: .topLeading, startRadius: 200, endRadius: 205).ignoresSafeArea()
                 
@@ -25,7 +25,7 @@ struct LoginView: View {
                 VStack(spacing: 20) {
                     Text ("iChat")
                         .font(.largeTitle.bold())
-                        .foregroundColor(Color("AppBlue"))
+                        .foregroundColor(Color.primaryColor)
                         .offset(y: -100)
                         
                     
@@ -58,7 +58,7 @@ struct LoginView: View {
                             .frame(width: 180)
                             .background {
                                 RoundedRectangle(cornerRadius: 30)
-                                    .fill(Color("AppBlue"))
+                                    .fill(Color.primaryColor)
                                     .shadow(radius: 15)
                             }
                     }

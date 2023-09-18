@@ -63,7 +63,7 @@ class CustomViewFactory: ViewFactory {
     
     func makeEmptyMessagesView(for channel: ChatChannel, colors: ColorPalette) -> some View {
         ZStack {
-            Color("AppBlue").opacity(0.1).ignoresSafeArea()
+            Color.primaryColor.opacity(0.1).ignoresSafeArea()
             
             Text("No messages yet, enter the first one by tapping on the composer at the bottom of the screen.")
                 .padding()
@@ -76,8 +76,7 @@ class CustomViewFactory: ViewFactory {
     }
     
     func makeMessageListBackground(colors: ColorPalette, isInThread: Bool) -> some View {
-        Image("background")
-            .resizable(resizingMode: .tile)
+        Color.listBackgroundColor
     }
     
     func makeComposerViewModifier() -> some ViewModifier {

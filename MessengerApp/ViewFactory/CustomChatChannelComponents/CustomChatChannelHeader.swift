@@ -16,6 +16,57 @@ public struct CustomChatChannelHeader: ToolbarContent {
     
     @Binding var showingChannelInfo: Bool
     
+    @Environment(\.dismiss) var dismiss
+    
+    public var body: some ToolbarContent {
+        ToolbarItem(placement: .principal) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(channelName())
+                    .font(.headline)
+                    .foregroundColor(.white)
+                
+                if isActive(channel) {
+                    Text("Online")
+                        .font(.caption.bold())
+                        .foregroundColor(.secondaryText)
+                } else {
+                    Text(lastSeenTime(from: lastActiveDate(channel)))
+                        .font(.caption)
+                        .foregroundColor(.secondaryText)
+                }
+            }
+            .hLeading()
+        }
+        
+        ToolbarItem(placement: .navigationBarLeading) {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "arrow.left")
+                    .foregroundColor(.white)
+            }
+        }
+        
+        ToolbarItem(placement: .navigationBarLeading) {
+            MessageAvatarView(avatarURL: channel.imageURL != nil ? channel.imageURL : channelImage())
+        }
+        
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button {
+                showingChannelInfo = true
+            } label: {
+                Image(systemName: "info.circle.fill")
+                    .foregroundColor(.white)
+            }
+        }
+    }
+}
+
+
+// MARK: Channel Header Helper functions
+
+extension CustomChatChannelHeader {
+    
     private func isActive(_ channel: ChatChannel) -> Bool {
         let count = channel.lastActiveMembers.filter { member in
             member.isOnline
@@ -50,77 +101,5 @@ public struct CustomChatChannelHeader: ToolbarContent {
         let image = channel.lastActiveMembers.filter { $0.id != ChatClient.shared.currentUserId }.first?.imageURL
         
         return image
-    }
-    
-    @Environment(\.dismiss) var dismiss
-    @State private var isShowingChannelInfo = false
-    
-    public var body: some ToolbarContent {
-        ToolbarItem(placement: .principal) {
-            VStack(alignment: .center, spacing: 2) {
-                Text(channelName())
-                    .font(.headline)
-                    .foregroundColor(.white)
-                
-                if isActive(channel) {
-                    Text("Online")
-                        .font(.caption.bold())
-                        .foregroundColor(Color(hex: 0x70e000))
-                } else {
-                    Text(lastSeenTime(from: lastActiveDate(channel)))
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-            }
-        }
-        
-        ToolbarItem(placement: .navigationBarLeading) {
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "arrow.left")
-                    .foregroundColor(.white)
-            }
-        }
-        
-        ToolbarItem(placement: .navigationBarTrailing) {
-            Button {
-                showingChannelInfo = true
-            } label: {
-                MessageAvatarView(avatarURL: channel.imageURL != nil ? channel.imageURL : channelImage())
-            }
-        }
-    }
-}
-
-
-struct CustomChatChannelModifier: ChatChannelHeaderViewModifier {
-    
-    var channel: ChatChannel
-    
-    @State private var showingChannelInfo = false
-    
-    func body(content: Content) -> some View {
-        content
-            .navigationBarBackButtonHidden()
-            .toolbar {
-                CustomChatChannelHeader(channel: channel, showingChannelInfo: $showingChannelInfo)
-            }
-            .sheet(isPresented: $showingChannelInfo) {
-                NavigationStack {
-                    ChatChannelInfoView(channel: channel)
-                        .navigationBarTitleDisplayMode(.inline)
-                        .toolbar {
-                            ToolbarItem(placement: .navigationBarLeading) {
-                                Button {
-                                    showingChannelInfo = false
-                                } label: {
-                                    Text("Back")
-                                        .foregroundColor(.white)
-                                }
-                            }
-                        }
-                }
-            }
     }
 }

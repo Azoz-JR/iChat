@@ -38,7 +38,6 @@ struct ChatChannelsListView: View {
                 }
                 .onAppear {
                     streamViewModel.loadOnlineUsers()
-                    streamViewModel.loadSuggestedResults()
                 }
         }
         

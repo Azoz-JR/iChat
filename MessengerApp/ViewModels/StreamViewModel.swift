@@ -73,8 +73,8 @@ final class StreamViewModel: ObservableObject {
     
     func signOut() {
         if currentUserId != nil {
-        
-            ChatClient.shared.disconnect {
+            
+            ChatClient.shared.logout {
                 print("Client Disconnected")
             }
         } else {
@@ -217,9 +217,6 @@ final class StreamViewModel: ObservableObject {
     }
     
     func loadSuggestedResults() {
-        guard suggestedUsers.isEmpty else {
-            return
-        }
         
         let controller = ChatClient.shared.userListController(query: .init(filter: .equal(.role, to: .user), pageSize: 10))
         
@@ -236,9 +233,6 @@ final class StreamViewModel: ObservableObject {
     }
     
     func loadOnlineUsers() {
-        guard onlineUsers.isEmpty else {
-            return
-        }
         
         let keys: [String] = tokens.keys.map {$0}
         

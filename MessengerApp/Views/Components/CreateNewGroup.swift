@@ -16,9 +16,8 @@ struct CreateNewGroup: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 5) {
             SearchBar(text: $streamViewModel.searchText, barColor: Color("ListRowBackground"), prompt: "Search users")
-                .padding(.horizontal, 10)
                 .padding(.top, 10)
             
             List {
@@ -41,8 +40,9 @@ struct CreateNewGroup: View {
                 .alignmentGuide(.listRowSeparatorLeading) { d in
                     d[.leading]
                 }
-                .listRowBackground(Color("ListRowBackground"))
+                //.listRowBackground(Color("ListRowBackground"))
             }
+            .listStyle(.grouped)
             .navigationTitle("New Group")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden()

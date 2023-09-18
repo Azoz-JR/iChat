@@ -29,7 +29,7 @@ struct SearchBar: View, KeyboardReadable {
                 .padding(.leading, 8)
                 .padding(.horizontal, 24)
                 .background(barColor)
-                .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 .overlay(
                     HStack {
                         Image(uiImage: images.searchIcon)
