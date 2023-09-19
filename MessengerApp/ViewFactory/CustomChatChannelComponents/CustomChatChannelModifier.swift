@@ -33,7 +33,7 @@ struct CustomChatChannelModifier: ChatChannelHeaderViewModifier {
                                     showingChannelInfo = false
                                 } label: {
                                     Text("Back")
-                                        .foregroundColor(.white)
+                                        .foregroundColor(.primaryColor)
                                 }
                             }
                         }

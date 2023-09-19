@@ -24,20 +24,39 @@ struct ChatChannelsListView: View {
     
     var body: some View {
         NavigationStack {
-            ChatChannelListView(viewFactory: CustomViewFactory.shared, viewModel: type == .messaging ? chatsViewModel : groupsViewModel, embedInNavigationView: false)
-                .navigationTitle(type == .messaging ? "Chats" : "Groups")
-                .navigationBarTitleDisplayMode(.large)
-                .navigationBarBackButtonHidden()
-                .fullScreenCover(isPresented: $streamViewModel.showingProfile) {
-                    ProfileView()
+            ZStack(alignment: .bottomTrailing) {
+                ChatChannelListView(viewFactory: CustomViewFactory.shared, viewModel: type == .messaging ? chatsViewModel : groupsViewModel, embedInNavigationView: false)
+                
+                Button {
+                    withAnimation {
+                        streamViewModel.showSearchUsersView = true
+                    }
+                } label: {
+                    Image(systemName: "square.and.pencil")
+                        .foregroundColor(.white)
+                        .font(.title2)
+                        .frame(width: 50, height: 50)
+                        .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+                        .background {
+                            RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                .fill(Color.primaryColor)
+                        }
+                        .padding()
                 }
+            }
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text(type == .messaging ? "Chats" : "Groups")
+                            .font(.title.bold())
+                            .foregroundColor(.primaryColor)
+                            .hLeading()
+                    }
+                }
+                .navigationBarBackButtonHidden()
                 .fullScreenCover(isPresented: $streamViewModel.showSearchUsersView) {
                     NavigationStack {
                         SearchUsersView()
                     }
-                }
-                .onAppear {
-                    streamViewModel.loadOnlineUsers()
                 }
         }
         

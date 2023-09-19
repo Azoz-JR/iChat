@@ -56,6 +56,7 @@ class CustomViewFactory: ViewFactory {
         VStack(spacing: 0) {
             SearchBar(text: searchText, barColor: Color.gray.opacity(0.2), prompt: "Search messages")
                 .padding(.top, 10)
+                .padding(.horizontal, 10)
             
             UserOnlineView()
         }

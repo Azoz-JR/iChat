@@ -12,6 +12,6 @@ struct ComposerBackgroundViewModifier: ViewModifier {
     
     public func body(content: Content) -> some View {
         content
-            .background(Color.listBackgroundColor)
+            .background(Color.navigationBarColor)
     }
 }

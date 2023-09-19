@@ -30,8 +30,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         ChatClient.shared = chatClient
         
         var colors = ColorPalette()
-        colors.messageCurrentUserBackground = [UIColor(Color.outgoingChatBubbleColor)]
-        colors.messageCurrentUserTextColor = UIColor(Color.primaryText)
+        colors.messageCurrentUserBackground = [UIColor(Color.primaryColor)]
+        colors.messageCurrentUserTextColor = UIColor(.white)
         colors.messageOtherUserTextColor = UIColor(Color.primaryText)
         colors.tintColor = .primaryColor
         //colors.textLowEmphasis = UIColor(Color.secondaryText)

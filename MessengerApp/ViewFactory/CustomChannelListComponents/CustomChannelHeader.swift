@@ -23,21 +23,17 @@ public struct CustomChannelHeader: ToolbarContent {
 
     public var body: some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
-            Button {
-                streamViewModel.showingProfile = true
-            } label: {
-                MessageAvatarView(avatarURL: streamViewModel.imageURL)
-                    .modifier(CircleImageModifier())
-            }
+            MessageAvatarView(avatarURL: streamViewModel.imageURL)
+                .modifier(CircleImageModifier())
         }
         
         ToolbarItem(placement: .navigationBarTrailing) {
             Button {
-                streamViewModel.showSearchUsersView = true
+                streamViewModel.showingProfile = true
             } label: {
-                Image(systemName: "square.and.pencil")
-                    .font(.title2)
-                    .foregroundColor(.white)
+                Image(systemName: "gear")
+                    .font(.title3.bold())
+                    .foregroundColor(.primaryColor)
             }
         }
     }

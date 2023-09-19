@@ -35,12 +35,10 @@ struct UserOnlineView: View {
                                         .offset(x: -3, y: -3)
                                 }
                                 
-                                if let username = user.name {
-                                    Text(username)
-                                        .font(.system(size: 10))
-                                        .lineLimit(2)
-                                        .foregroundColor(.primary)
-                                }
+                                Text(user.id.description)
+                                    .font(.system(size: 10))
+                                    .lineLimit(2)
+                                    .foregroundColor(.primary)
                             }
                             .padding(.leading, 5)
                         }

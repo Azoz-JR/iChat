@@ -50,6 +50,8 @@ final class StreamViewModel: ObservableObject {
     
     @Published var showingchangeProfilePictureSheet = false
     
+    @Published var isSearchBarFocused = false
+        
     var isSignedIn: Bool {
         ChatClient.shared.currentUserId != nil
     }
@@ -233,10 +235,7 @@ final class StreamViewModel: ObservableObject {
     }
     
     func loadOnlineUsers() {
-        
-        let keys: [String] = tokens.keys.map {$0}
-        
-        let controller = ChatClient.shared.userListController(query: .init(filter: .in(.id, values: keys), pageSize: 10))
+        let controller = ChatClient.shared.userListController(query: .init(pageSize: 10))
         
         controller.synchronize { [weak self] error in
             if let error = error {
@@ -244,7 +243,7 @@ final class StreamViewModel: ObservableObject {
                 return
             }
             
-            print("QUERIED FIRST PAGE SUCCESSFULLY")
+            print("QUERIED FIRST PAGE SUCCESSFULLY: \(controller.users.count)")
             self?.onlineUsers = controller.users.filter { ($0.id.description != self?.currentUserId) }
         }
     }

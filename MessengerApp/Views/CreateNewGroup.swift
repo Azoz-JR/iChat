@@ -15,16 +15,14 @@ struct CreateNewGroup: View {
     
     @Environment(\.dismiss) var dismiss
     
+    @FocusState private var focused: Bool
+    
     var body: some View {
-        VStack(spacing: 5) {
-            SearchBar(text: $streamViewModel.searchText, barColor: Color("ListRowBackground"), prompt: "Search users")
-                .padding(.top, 10)
-            
             List {
                 Section {
                     TextField("Group Name", text: $streamViewModel.newGroupName)
                 }
-                .listRowBackground(Color("ListRowBackground"))
+                .listRowBackground(Color.navigationBarColor)
                 
                 Group {
                     if streamViewModel.searchText.isEmpty {
@@ -43,7 +41,6 @@ struct CreateNewGroup: View {
                 //.listRowBackground(Color("ListRowBackground"))
             }
             .listStyle(.grouped)
-            .navigationTitle("New Group")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden()
             .scrollContentBackground(.hidden)
@@ -53,8 +50,34 @@ struct CreateNewGroup: View {
                         dismiss()
                     } label: {
                         Image(systemName: "arrow.left")
-                            .foregroundColor(.white)
+                            .foregroundColor(.primaryColor)
                     }
+                }
+                
+                ToolbarItem(placement: .principal) {
+                    TextField("Search users", text: $streamViewModel.searchText)
+                        .focused($focused)
+                        .padding(.horizontal)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 40)
+                        .background(Color.navigationBarColor)
+                        .cornerRadius(5)
+                        .overlay {
+                            HStack {
+                                Spacer()
+                                
+                                if !streamViewModel.searchText.isEmpty {
+                                    Button {
+                                        streamViewModel.searchText = ""
+                                    } label: {
+                                        Image(systemName: "xmark.circle")
+                                            .frame(width: 15, height: 15)
+                                            .foregroundColor(.gray)
+                                            .padding(.trailing, 8)
+                                    }
+                                }
+                            }
+                        }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -64,10 +87,12 @@ struct CreateNewGroup: View {
                         }
                     } label: {
                         Text("Create")
-                            .foregroundColor(streamViewModel.newGroupUsers.count < 2 ? .white.opacity(0.4) : .white)
                             .disabled(streamViewModel.newGroupUsers.count < 2)
                     }
                 }
+            }
+            .onAppear {
+                focused = true
             }
             .onDisappear {
                 streamViewModel.searchText = ""
@@ -82,7 +107,6 @@ struct CreateNewGroup: View {
             }
             .fullScreenCover(isPresented: $streamViewModel.showingSelectedChannel) {
                 DirectChatChannelView()
-        }
         }
         .background(Color("ListBackground"))
     }

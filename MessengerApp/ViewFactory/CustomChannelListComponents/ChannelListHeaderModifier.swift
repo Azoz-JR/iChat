@@ -20,7 +20,7 @@ struct CustomChannelModifier: ChannelListHeaderViewModifier {
                 profileShown = true
             }
         }
-        .navigationBarTitleDisplayMode(.large)
+        //.navigationBarTitleDisplayMode(.large)
         .sheet(isPresented: $profileShown) {
             SearchUsersView()
         }

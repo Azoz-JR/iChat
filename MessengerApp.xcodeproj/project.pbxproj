@@ -40,6 +40,7 @@
 		978114FD2A8CDDD900394DB7 /* UserOnlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978114FC2A8CDDD900394DB7 /* UserOnlineView.swift */; };
 		978114FF2A8CE0C500394DB7 /* VerticalPaddingViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978114FE2A8CE0C500394DB7 /* VerticalPaddingViewModifier.swift */; };
 		978115052A8CE4FB00394DB7 /* EmptyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978115042A8CE4FB00394DB7 /* EmptyPageView.swift */; };
+		97B71CA32AB9CE68009C0FA4 /* SideMenuProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B71CA22AB9CE68009C0FA4 /* SideMenuProfileView.swift */; };
 		97C0D8D12A99118200580BEB /* ChatChannelsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C0D8D02A99118200580BEB /* ChatChannelsListView.swift */; };
 		97C0D8D32A9B4CDB00580BEB /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C0D8D22A9B4CDB00580BEB /* SearchResultsView.swift */; };
 		97C0D8D52A9BA4E400580BEB /* DirectChatChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C0D8D42A9BA4E400580BEB /* DirectChatChannelView.swift */; };
@@ -83,6 +84,7 @@
 		978114FC2A8CDDD900394DB7 /* UserOnlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOnlineView.swift; sourceTree = "<group>"; };
 		978114FE2A8CE0C500394DB7 /* VerticalPaddingViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalPaddingViewModifier.swift; sourceTree = "<group>"; };
 		978115042A8CE4FB00394DB7 /* EmptyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPageView.swift; sourceTree = "<group>"; };
+		97B71CA22AB9CE68009C0FA4 /* SideMenuProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuProfileView.swift; sourceTree = "<group>"; };
 		97C0D8D02A99118200580BEB /* ChatChannelsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatChannelsListView.swift; sourceTree = "<group>"; };
 		97C0D8D22A9B4CDB00580BEB /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
 		97C0D8D42A9BA4E400580BEB /* DirectChatChannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectChatChannelView.swift; sourceTree = "<group>"; };
@@ -177,6 +179,9 @@
 				978114B82A8A901800394DB7 /* LoginView.swift */,
 				978114B62A8A901800394DB7 /* ProfileView.swift */,
 				97C0D8D02A99118200580BEB /* ChatChannelsListView.swift */,
+				97B71CA22AB9CE68009C0FA4 /* SideMenuProfileView.swift */,
+				973382F72A90F249003172E7 /* SearchUsersView.swift */,
+				97C0D8D82A9D337600580BEB /* CreateNewGroup.swift */,
 				978114BE2A8A90B400394DB7 /* Components */,
 			);
 			path = Views;
@@ -214,8 +219,6 @@
 				97C0D8D42A9BA4E400580BEB /* DirectChatChannelView.swift */,
 				977FAA5F2A9FB7FD0003059C /* NewGroupListView.swift */,
 				97C0D8D22A9B4CDB00580BEB /* SearchResultsView.swift */,
-				973382F72A90F249003172E7 /* SearchUsersView.swift */,
-				97C0D8D82A9D337600580BEB /* CreateNewGroup.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				978114B32A8A8FDC00394DB7 /* UIDesignHelperFunctions.swift in Sources */,
 				97C0D8D32A9B4CDB00580BEB /* SearchResultsView.swift in Sources */,
 				973382F42A8FE216003172E7 /* CircleImageModifier.swift in Sources */,
+				97B71CA32AB9CE68009C0FA4 /* SideMenuProfileView.swift in Sources */,
 				978114FB2A8CD92F00394DB7 /* CustomListRowSeparator.swift in Sources */,
 				973382F62A901353003172E7 /* MessageListConfig.swift in Sources */,
 				973382EC2A8FAD9D003172E7 /* CustomChatChannelHeader.swift in Sources */,
@@ -479,8 +483,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -510,8 +514,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

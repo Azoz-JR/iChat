@@ -40,7 +40,7 @@ extension Color {
     static let secondaryButtonColor = Color(hex: 0xEFEFF4)
     
     // Navigation Bar Color
-    static let navigationBarColor = Color(hex: 0xFFFFFF)
+    static let navigationBarColor = Color("navigationBarColor")
     
     //ListBackground Color
     static let listBackgroundColor = Color("ListBackground")

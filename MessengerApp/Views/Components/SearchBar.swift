@@ -10,26 +10,25 @@ import StreamChatSwiftUI
 import SwiftUI
 
 struct SearchBar: View, KeyboardReadable {
-        
+    
     @Injected(\.colors) private var colors
     @Injected(\.fonts) private var fonts
     @Injected(\.images) private var images
-
+    
     @Binding var text: String
     @State private var isEditing = false
     
     let barColor: Color
     let prompt: String
-
+    
     var body: some View {
         HStack {
             TextField(prompt, text: $text)
-                .frame(height: 30)
+                .frame(height: 20)
                 .padding(8)
                 .padding(.leading, 8)
-                .padding(.horizontal, 24)
-                .background(barColor)
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .padding(.horizontal, 24)
                 .overlay(
                     HStack {
                         Image(uiImage: images.searchIcon)
@@ -37,9 +36,9 @@ struct SearchBar: View, KeyboardReadable {
                             .foregroundColor(Color(colors.textLowEmphasis))
                             .frame(maxHeight: 18)
                             .padding(.leading, 12)
-
+                        
                         Spacer()
-
+                        
                         if !self.text.isEmpty {
                             Button(action: {
                                 self.text = ""
@@ -53,10 +52,12 @@ struct SearchBar: View, KeyboardReadable {
                         }
                     }
                 )
-                //.padding(.horizontal, 8)
+                .background {
+                    RoundedRectangle(cornerRadius: 10, style: .continuous).fill(barColor)
+                }
                 .transition(.identity)
                 .animation(.easeInOut, value: isEditing)
-
+            
             if isEditing {
                 Button(action: {
                     withAnimation(.easeInOut) {
@@ -74,7 +75,6 @@ struct SearchBar: View, KeyboardReadable {
                 .transition(.move(edge: .trailing))
             }
         }
-        .padding(.horizontal, 10)
         .onReceive(keyboardWillChangePublisher) { shown in
             if shown {
                 self.isEditing = true

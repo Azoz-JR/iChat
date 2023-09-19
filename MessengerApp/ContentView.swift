@@ -13,16 +13,23 @@ struct ContentView: View {
     @EnvironmentObject var streamViewModel: StreamViewModel
         
     var body: some View {
-        TabView {
-            ChatChannelsListView(type: .messaging)
-                .tabItem {
-                    Label("Chats", systemImage: "message")
-                }
+        ZStack {
+            TabView {
+                ChatChannelsListView(type: .messaging)
+                    .tabItem {
+                        Label("Chats", systemImage: "message")
+                    }
+                
+                ChatChannelsListView(type: .team)
+                    .tabItem {
+                        Label("Groups", systemImage: "person.3.fill")
+                    }
+            }
             
-            ChatChannelsListView(type: .team)
-                .tabItem {
-                    Label("Groups", systemImage: "person.3.fill")
-                }
+            SideMenuProfileView(content: AnyView(ProfileView()))
+        }
+        .onAppear {
+            streamViewModel.loadOnlineUsers()
         }
         .fullScreenCover(isPresented: $streamViewModel.showingSelectedChannel) {
             DirectChatChannelView()
@@ -34,7 +41,7 @@ struct ContentView: View {
                     LoadingScreen()
                 }
             }
-        }
+    }
     }
 }
 

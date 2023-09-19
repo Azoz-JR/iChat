@@ -23,16 +23,16 @@ public struct CustomChatChannelHeader: ToolbarContent {
             VStack(alignment: .leading, spacing: 2) {
                 Text(channelName())
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
                 
                 if isActive(channel) {
                     Text("Online")
                         .font(.caption.bold())
-                        .foregroundColor(.secondaryText)
+                        .foregroundColor(.secondary)
                 } else {
                     Text(lastSeenTime(from: lastActiveDate(channel)))
                         .font(.caption)
-                        .foregroundColor(.secondaryText)
+                        .foregroundColor(.secondary)
                 }
             }
             .hLeading()
@@ -43,7 +43,7 @@ public struct CustomChatChannelHeader: ToolbarContent {
                 dismiss()
             } label: {
                 Image(systemName: "arrow.left")
-                    .foregroundColor(.white)
+                    .foregroundColor(.primaryColor)
             }
         }
         
@@ -56,7 +56,7 @@ public struct CustomChatChannelHeader: ToolbarContent {
                 showingChannelInfo = true
             } label: {
                 Image(systemName: "info.circle.fill")
-                    .foregroundColor(.white)
+                    .foregroundColor(.primaryColor)
             }
         }
     }
