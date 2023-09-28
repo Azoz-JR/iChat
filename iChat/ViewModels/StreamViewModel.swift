@@ -55,7 +55,11 @@ final class StreamViewModel: ObservableObject {
     @AppStorage("colorScheme") var userPrefersDarkMode: Bool = false
         
     var isSignedIn: Bool {
-        ChatClient.shared.currentUserId != nil
+        if let authUser = try? AuthenticationManager.shared.getAuthenticatedUser() {
+            return ChatClient.shared.currentUserId != nil
+        } else {
+            return false
+        }
     }
     
     var currentUserId: String? {
@@ -86,7 +90,7 @@ final class StreamViewModel: ObservableObject {
         }
     }
     
-    func signIn(username: String, completion: @escaping (Bool) -> ()) {
+    func signIn(username: String) {
         
         ChatClient.shared.connectUser(userInfo: UserInfo(id: username, name: username), token: .development(userId: username)) { [weak self] error in
             
@@ -97,7 +101,7 @@ final class StreamViewModel: ObservableObject {
             }
             
             print("\(username) LOGGED IN SUCCESSFULLY!")
-            completion(error == nil)
+            self?.showSignInView = false
         }
     }
         

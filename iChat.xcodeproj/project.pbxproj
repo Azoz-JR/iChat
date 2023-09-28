@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		970EE90F2AC33D0700E23BA2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 970EE90E2AC33D0700E23BA2 /* FirebaseAnalytics */; };
+		970EE9132AC33D0700E23BA2 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 970EE9122AC33D0700E23BA2 /* FirebaseAnalyticsSwift */; };
+		970EE91B2AC33D0700E23BA2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 970EE91A2AC33D0700E23BA2 /* FirebaseAuth */; };
+		970EE9272AC33D0700E23BA2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 970EE9262AC33D0700E23BA2 /* FirebaseFirestore */; };
+		970EE92B2AC33D0700E23BA2 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 970EE92A2AC33D0700E23BA2 /* FirebaseFirestoreSwift */; };
+		970EE9462AC33DB800E23BA2 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 970EE9452AC33DB800E23BA2 /* GoogleSignIn */; };
+		970EE9482AC33DB800E23BA2 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 970EE9472AC33DB800E23BA2 /* GoogleSignInSwift */; };
+		970EE94B2AC3419000E23BA2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 970EE94A2AC3419000E23BA2 /* GoogleService-Info.plist */; };
+		970EE94F2AC3435900E23BA2 /* SignInWithGoogleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EE94D2AC3435800E23BA2 /* SignInWithGoogleHelper.swift */; };
+		970EE9502AC3435900E23BA2 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EE94E2AC3435900E23BA2 /* AuthenticationManager.swift */; };
+		970EE9522AC3438400E23BA2 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EE9512AC3438400E23BA2 /* Utilities.swift */; };
+		970EE95C2AC3453200E23BA2 /* SignInEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EE9582AC3453200E23BA2 /* SignInEmailViewModel.swift */; };
+		970EE95D2AC3453200E23BA2 /* SignUpEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EE9592AC3453200E23BA2 /* SignUpEmailView.swift */; };
+		970EE95E2AC3453200E23BA2 /* SignUpEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EE95A2AC3453200E23BA2 /* SignUpEmailViewModel.swift */; };
+		970EE9612AC3464800E23BA2 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EE95F2AC3464700E23BA2 /* AuthenticationViewModel.swift */; };
+		970EE9622AC3464800E23BA2 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EE9602AC3464800E23BA2 /* SettingsViewModel.swift */; };
+		970EE9642AC3467A00E23BA2 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EE9632AC3467A00E23BA2 /* UserManager.swift */; };
 		9718E6832AB75D81004A213C /* CustomChatChannelModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9718E6822AB75D81004A213C /* CustomChatChannelModifier.swift */; };
 		973382EC2A8FAD9D003172E7 /* CustomChatChannelHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973382EB2A8FAD9C003172E7 /* CustomChatChannelHeader.swift */; };
 		973382F02A8FD130003172E7 /* BackButtonDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973382EF2A8FD130003172E7 /* BackButtonDisplay.swift */; };
@@ -51,6 +68,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		970EE94A2AC3419000E23BA2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		970EE94C2AC341F200E23BA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		970EE94D2AC3435800E23BA2 /* SignInWithGoogleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWithGoogleHelper.swift; sourceTree = "<group>"; };
+		970EE94E2AC3435900E23BA2 /* AuthenticationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		970EE9512AC3438400E23BA2 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		970EE9582AC3453200E23BA2 /* SignInEmailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInEmailViewModel.swift; sourceTree = "<group>"; };
+		970EE9592AC3453200E23BA2 /* SignUpEmailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpEmailView.swift; sourceTree = "<group>"; };
+		970EE95A2AC3453200E23BA2 /* SignUpEmailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewModel.swift; sourceTree = "<group>"; };
+		970EE95F2AC3464700E23BA2 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		970EE9602AC3464800E23BA2 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		970EE9632AC3467A00E23BA2 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		9718E6822AB75D81004A213C /* CustomChatChannelModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChatChannelModifier.swift; sourceTree = "<group>"; };
 		973382EB2A8FAD9C003172E7 /* CustomChatChannelHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChatChannelHeader.swift; sourceTree = "<group>"; };
 		973382EF2A8FD130003172E7 /* BackButtonDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonDisplay.swift; sourceTree = "<group>"; };
@@ -99,13 +127,43 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				970EE9132AC33D0700E23BA2 /* FirebaseAnalyticsSwift in Frameworks */,
+				970EE90F2AC33D0700E23BA2 /* FirebaseAnalytics in Frameworks */,
+				970EE92B2AC33D0700E23BA2 /* FirebaseFirestoreSwift in Frameworks */,
+				970EE9482AC33DB800E23BA2 /* GoogleSignInSwift in Frameworks */,
 				978114AB2A8A8FB000394DB7 /* StreamChatSwiftUI in Frameworks */,
+				970EE91B2AC33D0700E23BA2 /* FirebaseAuth in Frameworks */,
+				970EE9272AC33D0700E23BA2 /* FirebaseFirestore in Frameworks */,
+				970EE9462AC33DB800E23BA2 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		970EE9492AC33DD500E23BA2 /* FireBase */ = {
+			isa = PBXGroup;
+			children = (
+				970EE95F2AC3464700E23BA2 /* AuthenticationViewModel.swift */,
+				970EE9602AC3464800E23BA2 /* SettingsViewModel.swift */,
+				970EE94E2AC3435900E23BA2 /* AuthenticationManager.swift */,
+				970EE9632AC3467A00E23BA2 /* UserManager.swift */,
+				970EE94D2AC3435800E23BA2 /* SignInWithGoogleHelper.swift */,
+			);
+			path = FireBase;
+			sourceTree = "<group>";
+		};
+		970EE9532AC3449E00E23BA2 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				978114B82A8A901800394DB7 /* LoginView.swift */,
+				970EE9582AC3453200E23BA2 /* SignInEmailViewModel.swift */,
+				970EE9592AC3453200E23BA2 /* SignUpEmailView.swift */,
+				970EE95A2AC3453200E23BA2 /* SignUpEmailViewModel.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		973382ED2A8FADA5003172E7 /* CustomChannelListComponents */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,15 +209,17 @@
 		978114962A8A8F0700394DB7 /* iChat */ = {
 			isa = PBXGroup;
 			children = (
+				970EE94C2AC341F200E23BA2 /* Info.plist */,
 				978114972A8A8F0700394DB7 /* iChatApp.swift */,
-				978114992A8A8F0700394DB7 /* ContentView.swift */,
 				978114C92A8A931100394DB7 /* AppDelegate.swift */,
+				970EE9492AC33DD500E23BA2 /* FireBase */,
 				978114A62A8A8F2C00394DB7 /* ViewModels */,
 				978114A52A8A8F1C00394DB7 /* Views */,
 				97E4600A2AAF8D4B00B02EF9 /* ViewFactory */,
 				978114A72A8A8F3800394DB7 /* Resources */,
 				9781149D2A8A8F0A00394DB7 /* Preview Content */,
 				9781149B2A8A8F0A00394DB7 /* Assets.xcassets */,
+				970EE94A2AC3419000E23BA2 /* GoogleService-Info.plist */,
 			);
 			path = iChat;
 			sourceTree = "<group>";
@@ -175,8 +235,9 @@
 		978114A52A8A8F1C00394DB7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				970EE9532AC3449E00E23BA2 /* Authentication */,
 				978114B72A8A901800394DB7 /* RootView.swift */,
-				978114B82A8A901800394DB7 /* LoginView.swift */,
+				978114992A8A8F0700394DB7 /* ContentView.swift */,
 				978114B62A8A901800394DB7 /* ProfileView.swift */,
 				97C0D8D02A99118200580BEB /* ChatChannelsListView.swift */,
 				97B71CA22AB9CE68009C0FA4 /* SideMenuProfileView.swift */,
@@ -198,6 +259,7 @@
 		978114A72A8A8F3800394DB7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				970EE9512AC3438400E23BA2 /* Utilities.swift */,
 				978114AD2A8A8FDC00394DB7 /* Color-Theme.swift */,
 				978114B02A8A8FDC00394DB7 /* Credentials.swift */,
 				978114AE2A8A8FDC00394DB7 /* UIDesignHelperFunctions.swift */,
@@ -251,6 +313,13 @@
 			name = iChat;
 			packageProductDependencies = (
 				978114AA2A8A8FB000394DB7 /* StreamChatSwiftUI */,
+				970EE90E2AC33D0700E23BA2 /* FirebaseAnalytics */,
+				970EE9122AC33D0700E23BA2 /* FirebaseAnalyticsSwift */,
+				970EE91A2AC33D0700E23BA2 /* FirebaseAuth */,
+				970EE9262AC33D0700E23BA2 /* FirebaseFirestore */,
+				970EE92A2AC33D0700E23BA2 /* FirebaseFirestoreSwift */,
+				970EE9452AC33DB800E23BA2 /* GoogleSignIn */,
+				970EE9472AC33DB800E23BA2 /* GoogleSignInSwift */,
 			);
 			productName = MessengerApp;
 			productReference = 978114942A8A8F0700394DB7 /* iChat.app */;
@@ -282,6 +351,8 @@
 			mainGroup = 9781148B2A8A8F0700394DB7;
 			packageReferences = (
 				978114A92A8A8FB000394DB7 /* XCRemoteSwiftPackageReference "stream-chat-swiftui" */,
+				970EE90D2AC33D0700E23BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				970EE9442AC33DB800E23BA2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 978114952A8A8F0700394DB7 /* Products */;
 			projectDirPath = "";
@@ -297,6 +368,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				970EE94B2AC3419000E23BA2 /* GoogleService-Info.plist in Resources */,
 				9781149F2A8A8F0A00394DB7 /* Preview Assets.xcassets in Resources */,
 				9781149C2A8A8F0A00394DB7 /* Assets.xcassets in Resources */,
 			);
@@ -317,36 +389,45 @@
 				977FAA602A9FB7FD0003059C /* NewGroupListView.swift in Sources */,
 				978115052A8CE4FB00394DB7 /* EmptyPageView.swift in Sources */,
 				9781149A2A8A8F0700394DB7 /* ContentView.swift in Sources */,
+				970EE9522AC3438400E23BA2 /* Utilities.swift in Sources */,
+				970EE94F2AC3435900E23BA2 /* SignInWithGoogleHelper.swift in Sources */,
 				9718E6832AB75D81004A213C /* CustomChatChannelModifier.swift in Sources */,
 				978114B52A8A8FDC00394DB7 /* Credentials.swift in Sources */,
 				978114BD2A8A903D00394DB7 /* StreamViewModel.swift in Sources */,
 				978114C72A8A90B400394DB7 /* LoadingScreen.swift in Sources */,
 				978114F72A8CD54F00394DB7 /* NoChannelsYet.swift in Sources */,
 				97C0D8D92A9D337600580BEB /* CreateNewGroup.swift in Sources */,
+				970EE95E2AC3453200E23BA2 /* SignUpEmailViewModel.swift in Sources */,
 				973382F82A90F24A003172E7 /* SearchUsersView.swift in Sources */,
 				978114C82A8A90B400394DB7 /* ChannelListHeaderModifier.swift in Sources */,
 				978114982A8A8F0700394DB7 /* iChatApp.swift in Sources */,
 				973382FA2A9124EC003172E7 /* LastSeenMethod.swift in Sources */,
 				978114FF2A8CE0C500394DB7 /* VerticalPaddingViewModifier.swift in Sources */,
+				970EE9642AC3467A00E23BA2 /* UserManager.swift in Sources */,
 				978114C62A8A90B400394DB7 /* CustomChannelHeader.swift in Sources */,
 				978114BA2A8A901800394DB7 /* RootView.swift in Sources */,
+				970EE9612AC3464800E23BA2 /* AuthenticationViewModel.swift in Sources */,
 				978114B12A8A8FDC00394DB7 /* CustomViewFactory.swift in Sources */,
 				978114FD2A8CDDD900394DB7 /* UserOnlineView.swift in Sources */,
 				978114B32A8A8FDC00394DB7 /* UIDesignHelperFunctions.swift in Sources */,
 				97C0D8D32A9B4CDB00580BEB /* SearchResultsView.swift in Sources */,
 				973382F42A8FE216003172E7 /* CircleImageModifier.swift in Sources */,
+				970EE95C2AC3453200E23BA2 /* SignInEmailViewModel.swift in Sources */,
 				97B71CA32AB9CE68009C0FA4 /* SideMenuProfileView.swift in Sources */,
 				978114FB2A8CD92F00394DB7 /* CustomListRowSeparator.swift in Sources */,
 				973382F62A901353003172E7 /* MessageListConfig.swift in Sources */,
 				973382EC2A8FAD9D003172E7 /* CustomChatChannelHeader.swift in Sources */,
 				978114BB2A8A901800394DB7 /* LoginView.swift in Sources */,
 				97C5D8652AB6427B002F6B8C /* Test.swift in Sources */,
+				970EE9502AC3435900E23BA2 /* AuthenticationManager.swift in Sources */,
 				978114CA2A8A931100394DB7 /* AppDelegate.swift in Sources */,
 				977FAA622AA1005C0003059C /* CustomComposerBackground.swift in Sources */,
 				97C0D8D12A99118200580BEB /* ChatChannelsListView.swift in Sources */,
 				97C0D8D52A9BA4E400580BEB /* DirectChatChannelView.swift in Sources */,
+				970EE95D2AC3453200E23BA2 /* SignUpEmailView.swift in Sources */,
 				978114F92A8CD75900394DB7 /* BackgroundView.swift in Sources */,
 				978114B22A8A8FDC00394DB7 /* Color-Theme.swift in Sources */,
+				970EE9622AC3464800E23BA2 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +563,7 @@
 				DEVELOPMENT_TEAM = 5H48BX5PSY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iChat/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = iChat;
 				INFOPLIST_KEY_NSCameraUsageDescription = "MessengerApp camera use";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "MessengerApp photo use";
@@ -518,6 +600,7 @@
 				DEVELOPMENT_TEAM = 5H48BX5PSY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iChat/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = iChat;
 				INFOPLIST_KEY_NSCameraUsageDescription = "MessengerApp camera use";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "MessengerApp photo use";
@@ -567,6 +650,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		970EE90D2AC33D0700E23BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.15.0;
+			};
+		};
+		970EE9442AC33DB800E23BA2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		978114A92A8A8FB000394DB7 /* XCRemoteSwiftPackageReference "stream-chat-swiftui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/GetStream/stream-chat-swiftui.git";
@@ -578,6 +677,41 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		970EE90E2AC33D0700E23BA2 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 970EE90D2AC33D0700E23BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		970EE9122AC33D0700E23BA2 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 970EE90D2AC33D0700E23BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		970EE91A2AC33D0700E23BA2 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 970EE90D2AC33D0700E23BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		970EE9262AC33D0700E23BA2 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 970EE90D2AC33D0700E23BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		970EE92A2AC33D0700E23BA2 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 970EE90D2AC33D0700E23BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		970EE9452AC33DB800E23BA2 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 970EE9442AC33DB800E23BA2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		970EE9472AC33DB800E23BA2 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 970EE9442AC33DB800E23BA2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
 		978114AA2A8A8FB000394DB7 /* StreamChatSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 978114A92A8A8FB000394DB7 /* XCRemoteSwiftPackageReference "stream-chat-swiftui" */;

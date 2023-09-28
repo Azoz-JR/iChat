@@ -84,6 +84,11 @@ extension CustomChatChannelHeader {
     }
     
     func channelName() -> String {
+        
+        if let name = channel.name {
+            return name
+        }
+        
         let channelMembers = channel.lastActiveMembers.filter { $0.id != ChatClient.shared.currentUserId }
         
         guard let channelName = channelMembers.first?.id else {

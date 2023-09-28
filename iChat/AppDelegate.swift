@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseCore
 import UIKit
 import StreamChat
 import StreamChatSwiftUI
@@ -27,6 +28,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
+        FirebaseApp.configure()
+        
         ChatClient.shared = chatClient
         
         var colors = ColorPalette()
@@ -41,9 +44,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         streamChat = StreamChat(chatClient: ChatClient.shared, appearance: appearance, utils: utils)
         
-        if let userId = ChatClient.shared.currentUserId {
-            connectUser(username: userId)
-        }
+        getAuthUser()
         
         return true
     }
@@ -57,7 +58,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             
             print("\(username) LOGGED IN SUCCESSFULLY!")
         }
-        
+    }
+    
+    func getAuthUser() {
+        // Check if the user is authenticated on view appearance
+        if let authUser = try? AuthenticationManager.shared.getAuthenticatedUser() {
+            
+            if let userId = ChatClient.shared.currentUserId {
+                connectUser(username: userId)
+            }
+        }
     }
     
 }
