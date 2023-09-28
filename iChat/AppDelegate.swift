@@ -49,8 +49,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return true
     }
     
-    func connectUser(username: String) {
-        ChatClient.shared.connectUser(userInfo: UserInfo(id: username, name: username), token: .development(userId: username)) { error in
+    func connectUser(userId: String, username: String) {
+        ChatClient.shared.connectUser(userInfo: UserInfo(id: userId, name: username), token: .development(userId: userId)) { error in
             if let error = error {
                 print("ERROR CONNECTING USER: \(error.localizedDescription)")
                 return
@@ -62,11 +62,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     func getAuthUser() {
         // Check if the user is authenticated on view appearance
-        if let authUser = try? AuthenticationManager.shared.getAuthenticatedUser() {
+        guard (try? AuthenticationManager.shared.getAuthenticatedUser()) != nil else {
+            return
+        }
             
-            if let userId = ChatClient.shared.currentUserId {
-                connectUser(username: userId)
-            }
+        if let userId = ChatClient.shared.currentUserId, let username = ChatClient.shared.currentUserController().currentUser?.name {
+            connectUser(userId: userId, username: username)
         }
     }
     

@@ -90,9 +90,9 @@ final class StreamViewModel: ObservableObject {
         }
     }
     
-    func signIn(username: String) {
+    func signUp(userId: String, username: String) {
         
-        ChatClient.shared.connectUser(userInfo: UserInfo(id: username, name: username), token: .development(userId: username)) { [weak self] error in
+        ChatClient.shared.connectUser(userInfo: UserInfo(id: userId, name: username), token: .development(userId: userId)) { [weak self] error in
             
             if let error = error {
                 self?.errorMsg = error.localizedDescription
@@ -101,6 +101,21 @@ final class StreamViewModel: ObservableObject {
             }
             
             print("\(username) LOGGED IN SUCCESSFULLY!")
+            self?.showSignInView = false
+        }
+    }
+    
+    func signIn(userId: String) {
+        
+        ChatClient.shared.connectUser(userInfo: UserInfo(id: userId), token: .development(userId: userId)) { [weak self] error in
+            
+            if let error = error {
+                self?.errorMsg = error.localizedDescription
+                self?.error.toggle()
+                return
+            }
+            
+            print("\(userId) LOGGED IN SUCCESSFULLY!")
             self?.showSignInView = false
         }
     }

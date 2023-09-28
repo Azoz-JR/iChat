@@ -69,7 +69,7 @@ struct ProfileView: View {
                         }
                     }
                     
-                    Text(streamViewModel.currentUserId ?? "User")
+                    Text(streamViewModel.currentUser?.name ?? "User")
                         .font(.title.bold())
                     
                     Button {

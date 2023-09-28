@@ -18,9 +18,10 @@ struct DBUser: Codable {
     let dateCreated: Date?
     let isPremium: Bool?
     let preferences: [String]?
+    let username: String
     
     // Initializes a DBUser instance with the provided properties
-    init(userId: String, isAnonymous: Bool? = nil, email: String? = nil, photoUrl: String? = nil, dateCreated: Date? = nil, isPremium: Bool? = nil, preferences: [String]? = nil) {
+    init(userId: String, isAnonymous: Bool? = nil, email: String? = nil, photoUrl: String? = nil, dateCreated: Date? = nil, isPremium: Bool? = nil, preferences: [String]? = nil, username: String) {
         self.userId = userId
         self.isAnonymous = isAnonymous
         self.email = email
@@ -28,10 +29,11 @@ struct DBUser: Codable {
         self.dateCreated = dateCreated
         self.isPremium = isPremium
         self.preferences = preferences
+        self.username = username
     }
     
     // Initializes a DBUser instance from an AuthDataResultModel
-    init(auth: AuthDataResultModel) {
+    init(auth: AuthDataResultModel, username: String) {
         self.userId = auth.uid
         self.isAnonymous = auth.isAnonymous
         self.email = auth.email
@@ -39,6 +41,7 @@ struct DBUser: Codable {
         self.dateCreated = Date()
         self.isPremium = false
         self.preferences = nil
+        self.username = username
     }
     
     // Specifies the coding keys for encoding and decoding
@@ -50,6 +53,7 @@ struct DBUser: Codable {
         case dateCreated = "date_created"
         case isPremium = "user_ispremium"
         case preferences = "preferences"
+        case username = "username"
     }
     
     // Initializes a DBUser instance by decoding data from a decoder
@@ -62,6 +66,7 @@ struct DBUser: Codable {
         self.dateCreated = try container.decodeIfPresent(Date.self, forKey: .dateCreated)
         self.isPremium = try container.decodeIfPresent(Bool.self, forKey: .isPremium)
         self.preferences = try container.decodeIfPresent([String].self, forKey: .preferences)
+        self.username = try container.decode(String.self, forKey: .username)
     }
     
     // Encodes the DBUser instance into the given encoder
@@ -74,6 +79,7 @@ struct DBUser: Codable {
         try container.encodeIfPresent(self.dateCreated, forKey: .dateCreated)
         try container.encodeIfPresent(self.isPremium, forKey: .isPremium)
         try container.encodeIfPresent(self.preferences, forKey: .preferences)
+        try container.encode(self.username, forKey: .username)
     }
 }
 

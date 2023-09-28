@@ -11,7 +11,7 @@ import Foundation
 @MainActor
 final class AuthenticationViewModel: ObservableObject {
     
-    func signInGoogle(completion: @escaping (String) -> ()) async throws {
+    func signInGoogle(completion: @escaping (String, String) -> ()) async throws {
         // Create an instance of the SignInGoogleHelper
         let helper = SignInGoogleHelper()
         
@@ -22,12 +22,12 @@ final class AuthenticationViewModel: ObservableObject {
         let authDataResult = try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
         
         // Create a DBUser instance based on the authenticated data result
-        let user = DBUser(auth: authDataResult)
+        let user = DBUser(auth: authDataResult, username: tokens.name ?? "Unknown")
         
         // Create a new user in the database
         try await UserManager.shared.createNewUser(user: user)
         
-        completion(user.userId)
+        completion(user.userId, user.username)
     }
     
 //    func signInAnonymously() async throws {

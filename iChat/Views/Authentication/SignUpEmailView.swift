@@ -28,7 +28,18 @@ struct SignUpEmailView: View {
                     .font(.largeTitle.bold())
                     .foregroundColor(Color.primaryColor)
                 
-                TextField("Username", text: $viewModel.email)
+                TextField("Username", text: $viewModel.username)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .padding()
+                    .frame(width: 300, alignment: .leading)
+                    .background {
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(.primary, lineWidth: 2)
+                        
+                    }
+                
+                TextField("Email", text: $viewModel.email)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                     .padding()
@@ -52,9 +63,9 @@ struct SignUpEmailView: View {
                 Button {
                     Task {
                         do {
-                            try await viewModel.signUp { username in
+                            try await viewModel.signUp { userId, username in
                                 DispatchQueue.main.async {
-                                    streamViewModel.signIn(username: username)
+                                    streamViewModel.signUp(userId: userId, username: username)
                                 }
                             }
                         } catch {

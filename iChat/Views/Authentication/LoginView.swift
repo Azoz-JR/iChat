@@ -29,7 +29,7 @@ struct LoginView: View {
                         .font(.largeTitle.bold())
                         .foregroundColor(Color.primaryColor)
                     
-                    TextField("Username", text: $signInEmailViewModel.email)
+                    TextField("Email", text: $signInEmailViewModel.email)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
                         .padding()
@@ -61,9 +61,9 @@ struct LoginView: View {
                     Button {
                         Task {
                             do {
-                                try await signInEmailViewModel.signIn { username in
+                                try await signInEmailViewModel.signIn { userId, username in
                                     DispatchQueue.main.async {
-                                        streamViewModel.signIn(username: username)
+                                        streamViewModel.signIn(userId: userId)
                                     }
                                 }
                             } catch {
@@ -104,9 +104,9 @@ struct LoginView: View {
                     Button {
                         Task {
                             do {
-                                try await authenticationViewModel.signInGoogle { username in
+                                try await authenticationViewModel.signInGoogle { userId, username in
                                     DispatchQueue.main.async {
-                                        streamViewModel.signIn(username: username)
+                                        streamViewModel.signIn(userId: userId)
                                     }
                                 }
                             } catch {
