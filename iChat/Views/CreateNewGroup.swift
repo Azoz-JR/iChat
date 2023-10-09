@@ -15,7 +15,6 @@ struct CreateNewGroup: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @FocusState private var focused: Bool
     
     var body: some View {
             List {
@@ -38,61 +37,13 @@ struct CreateNewGroup: View {
                 .alignmentGuide(.listRowSeparatorLeading) { d in
                     d[.leading]
                 }
-                //.listRowBackground(Color("ListRowBackground"))
             }
             .listStyle(.grouped)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden()
             .scrollContentBackground(.hidden)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "arrow.left")
-                            .foregroundColor(.primaryColor)
-                    }
-                }
-                
-                ToolbarItem(placement: .principal) {
-                    TextField("Search users", text: $streamViewModel.searchText)
-                        .focused($focused)
-                        .padding(.horizontal)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 40)
-                        .background(Color.navigationBarColor)
-                        .cornerRadius(5)
-                        .overlay {
-                            HStack {
-                                Spacer()
-                                
-                                if !streamViewModel.searchText.isEmpty {
-                                    Button {
-                                        streamViewModel.searchText = ""
-                                    } label: {
-                                        Image(systemName: "xmark.circle")
-                                            .frame(width: 15, height: 15)
-                                            .foregroundColor(.gray)
-                                            .padding(.trailing, 8)
-                                    }
-                                }
-                            }
-                        }
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        DispatchQueue.main.async {
-                            streamViewModel.createGroupChannel()
-                        }
-                    } label: {
-                        Text("Create")
-                            .disabled(streamViewModel.newGroupUsers.count < 2)
-                    }
-                }
-            }
-            .onAppear {
-                focused = true
+                CreateNewGroupHeader()
             }
             .onDisappear {
                 streamViewModel.searchText = ""
@@ -109,14 +60,18 @@ struct CreateNewGroup: View {
                 DirectChatChannelView()
         }
         .background(Color("ListBackground"))
+        .alert("ERROR CREATING NEW GROUP...", isPresented: $streamViewModel.error) {
+            Button("OK") { }
+        } message: {
+            Text(streamViewModel.errorMsg)
+        }
+
     }
 }
 
-struct CreateNewGroup_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            CreateNewGroup()
-                .environmentObject(StreamViewModel())
-        }
+#Preview {
+    NavigationStack {
+        CreateNewGroup()
+            .environmentObject(StreamViewModel())
     }
 }

@@ -55,6 +55,10 @@ final class StreamViewModel: ObservableObject {
     @AppStorage("colorScheme") var userPrefersDarkMode: Bool = false
     
     @Published var showForgotPasswordView = false
+    
+    //Alerts properties
+    @Published var showAlert = false
+    @Published var alertMessage = ""
         
     var isSignedIn: Bool {
         if let _ = try? AuthenticationManager.shared.getAuthenticatedUser() {
@@ -102,7 +106,6 @@ final class StreamViewModel: ObservableObject {
                 return
             }
             
-            print("\(username) LOGGED IN SUCCESSFULLY!")
             DispatchQueue.main.async {
                 self?.showSignInView = false
             }
@@ -118,9 +121,7 @@ final class StreamViewModel: ObservableObject {
                 self?.error.toggle()
                 return
             }
-            
-            print("\(userId) LOGGED IN SUCCESSFULLY!")
-            
+                        
             DispatchQueue.main.async {
                 self?.showSignInView = false
             }
@@ -156,15 +157,12 @@ final class StreamViewModel: ObservableObject {
             
             if let error = error {
                 self?.errorMsg = error.localizedDescription
-                print("ERROR CREATING NEW CHANNEL : \(error.localizedDescription)")
                 self?.error.toggle()
                 
                 return
             }
             
-            //else Successful...
-            print("\(self?.newGroupName ?? "") CHANNEL CREATED SUCCESSFULLY!")
-            
+            //else Successful...            
             self?.newGroupName = ""
             self?.newGroupUsers = []
             

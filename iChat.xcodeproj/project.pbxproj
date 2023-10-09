@@ -71,6 +71,7 @@
 		97EF64A32AD40A6400E739B0 /* AuthProviderOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EF64A22AD40A6400E739B0 /* AuthProviderOption.swift */; };
 		97EF64A52AD40B1C00E739B0 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EF64A42AD40B1C00E739B0 /* ForgotPasswordView.swift */; };
 		97EF64A72AD40BBD00E739B0 /* LoginBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EF64A62AD40BBD00E739B0 /* LoginBackground.swift */; };
+		97EF64A92AD4309800E739B0 /* CreateNewGroupHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EF64A82AD4309800E739B0 /* CreateNewGroupHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,6 +133,7 @@
 		97EF64A22AD40A6400E739B0 /* AuthProviderOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProviderOption.swift; sourceTree = "<group>"; };
 		97EF64A42AD40B1C00E739B0 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		97EF64A62AD40BBD00E739B0 /* LoginBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginBackground.swift; sourceTree = "<group>"; };
+		97EF64A82AD4309800E739B0 /* CreateNewGroupHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewGroupHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +296,7 @@
 				97C0D8D42A9BA4E400580BEB /* DirectChatChannelView.swift */,
 				977FAA5F2A9FB7FD0003059C /* NewGroupListView.swift */,
 				97C0D8D22A9B4CDB00580BEB /* SearchResultsView.swift */,
+				97EF64A82AD4309800E739B0 /* CreateNewGroupHeader.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 				97EF64A52AD40B1C00E739B0 /* ForgotPasswordView.swift in Sources */,
 				973382F42A8FE216003172E7 /* CircleImageModifier.swift in Sources */,
 				970EE95C2AC3453200E23BA2 /* SignInEmailViewModel.swift in Sources */,
+				97EF64A92AD4309800E739B0 /* CreateNewGroupHeader.swift in Sources */,
 				97B71CA32AB9CE68009C0FA4 /* SideMenuProfileView.swift in Sources */,
 				978114FB2A8CD92F00394DB7 /* CustomListRowSeparator.swift in Sources */,
 				973382F62A901353003172E7 /* MessageListConfig.swift in Sources */,

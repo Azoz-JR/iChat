@@ -33,7 +33,7 @@ struct NewGroupListView: View {
                     MessageAvatarView(avatarURL: user.imageURL)
                     
                     
-                    Text(user.id)
+                    Text(user.name ?? "Unknown User")
                         .foregroundColor(.primary)
                         .lineLimit(1)
                         .font(.headline)

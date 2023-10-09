@@ -26,7 +26,7 @@ struct SearchUsersResultsView: View {
                     MessageAvatarView(avatarURL: user.imageURL)
                     
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(user.id)
+                        Text(user.name ?? "Unknown User")
                             .lineLimit(1)
                             .font(.headline)
                         

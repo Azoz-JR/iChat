@@ -12,6 +12,8 @@ import SwiftUI
 
 public struct CustomChatChannelHeader: ToolbarContent {
     
+    @Injected(\.chatClient) public var chatClient
+    
     public var channel: ChatChannel
     
     @Binding var showingChannelInfo: Bool
@@ -78,21 +80,28 @@ extension CustomChatChannelHeader {
     }
     
     private func lastActiveDate(_ channel: ChatChannel) -> Date {
-        let date = channel.lastActiveMembers.filter {$0.id != ChatClient.shared.currentUserId}.first?.lastActiveAt ?? .now
+        let date = channel.lastActiveMembers.filter {$0.id != chatClient.currentUserId}.first?.lastActiveAt ?? .now
         
         return date
     }
     
     func channelName() -> String {
+        let channelMembers = channel.lastActiveMembers.filter { $0.id != chatClient.currentUserId }
         
+        // Direct channel condition
+        if channelMembers.count == 1 {
+            if let name = channelMembers.first?.name {
+                return name
+            }
+        }
+        
+        // Group channel condition
         if let name = channel.name {
             return name
         }
         
-        let channelMembers = channel.lastActiveMembers.filter { $0.id != ChatClient.shared.currentUserId }
-        
-        guard let channelName = channelMembers.first?.id else {
-            return "UNKNOWN"
+        guard let channelName = channelMembers.first?.name else {
+            return "Unknown User"
         }
         
         return channelName
@@ -103,7 +112,7 @@ extension CustomChatChannelHeader {
             return channel.imageURL
         }
         
-        let image = channel.lastActiveMembers.filter { $0.id != ChatClient.shared.currentUserId }.first?.imageURL
+        let image = channel.lastActiveMembers.filter { $0.id != chatClient.currentUserId }.first?.imageURL
         
         return image
     }

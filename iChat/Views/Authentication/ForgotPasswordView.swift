@@ -12,6 +12,7 @@ struct ForgotPasswordView: View {
     @EnvironmentObject var streamViewModel: StreamViewModel
     
     @State private var email: String = ""
+    @State private var showConfirmationAlert = false
     
     @Environment(\.dismiss) var dismiss
     
@@ -33,16 +34,7 @@ struct ForgotPasswordView: View {
                     }
                 
                 Button {
-                    Task {
-                        do {
-                            try await AuthenticationManager.shared.resetPassword(email: email)
-                            
-                            dismiss()
-                        } catch {
-                            streamViewModel.errorMsg = error.localizedDescription
-                            streamViewModel.error = true
-                        }
-                    }
+                    showConfirmationAlert = true
                 } label: {
                     Text("Reset Password")
                         .foregroundColor(.white)
@@ -64,6 +56,32 @@ struct ForgotPasswordView: View {
         } message: {
             Text(streamViewModel.errorMsg)
         }
+        .alert("Your password reset successfully.", isPresented: $streamViewModel.showAlert) {
+            Button("OK") {
+                dismiss()
+            }
+        } message: {
+            Text("A message sent to your Email with your new password.")
+        }
+        .alert("Reset Password?", isPresented: $showConfirmationAlert) {
+            Button("Reset", role: .destructive) {
+                Task {
+                    do {
+                        try await AuthenticationManager.shared.resetPassword(email: email)
+                        
+                        streamViewModel.showAlert = true
+                    } catch {
+                        streamViewModel.errorMsg = error.localizedDescription
+                        streamViewModel.error = true
+                    }
+                }
+            }
+            
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("You cannot undo this action")
+        }
+
     }
 }
 
