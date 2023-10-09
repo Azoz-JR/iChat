@@ -128,7 +128,7 @@ final class StreamViewModel: ObservableObject {
         }
     }
         
-    func createGroupChannel() throws {
+    func createGroupChannel() {
         guard !newGroupUsers.isEmpty, !newGroupName.isEmpty else {
             self.errorMsg = "You have to write a group name"
             self.error.toggle()
