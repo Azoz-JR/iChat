@@ -35,7 +35,7 @@ final class SettingsViewModel: ObservableObject {
         try await AuthenticationManager.shared.delete()
     }
     
-    func resetPassword(email: String) async throws {
+    func resetPassword() async throws {
         // Reset the password for the current user's email
         try await AuthenticationManager.shared.resetPassword(email: currentUserEmail)
     }

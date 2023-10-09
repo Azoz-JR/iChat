@@ -74,9 +74,14 @@ struct ProfileView: View {
                     
                     Button {
                         DispatchQueue.main.async {
-                            streamViewModel.signOut()
-                            streamViewModel.showSignInView = true
-                            streamViewModel.showingProfile = false
+                            do {
+                                try AuthenticationManager.shared.signOut()
+                                streamViewModel.signOut()
+                                streamViewModel.showSignInView = true
+                                streamViewModel.showingProfile = false
+                            } catch {
+                                print("ERROR SIGNNING OUT: \(error.localizedDescription)")
+                            }
                         }
                         
                         

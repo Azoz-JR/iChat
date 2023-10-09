@@ -10,39 +10,48 @@ import SwiftUI
 struct Test: View {
     
     enum FocusedField {
-            case firstName, lastName
-        }
-
-        @State private var firstName = ""
-        @State private var lastName = ""
-        @FocusState private var focusedField: FocusedField?
-
-        var body: some View {
-            NavigationStack {
-                Form {
-                    TextField("First name", text: $firstName)
-                        .focused($focusedField, equals: .firstName)
-                    
-                    TextField("Last name", text: $lastName)
-                        .focused($focusedField, equals: .lastName)
+        case firstName, lastName
+    }
+    
+    @State private var firstName = ""
+    @State private var lastName = ""
+    @FocusState private var focusedField: FocusedField?
+    @State private var show = false
+    
+    var body: some View {
+        NavigationStack {
+            Form {
+                TextField("First name", text: $firstName)
+                    .focused($focusedField, equals: .firstName)
+                
+                TextField("Last name", text: $lastName)
+                    .focused($focusedField, equals: .lastName)
+                
+                Button("Show") {
+                    show.toggle()
                 }
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button(action: {}, label: {
-                            Text("Button")
-                        })
-                    }
-                    
-                    ToolbarItem(placement: .topBarLeading) {
-                            Text("Hello")
-                    }
+            }
+            .sheet(isPresented: $show, content: {
+                Text("Hello")
+                    .presentationDetents([.fraction(.infinity)])
+            })
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: {}, label: {
+                        Text("Button")
+                    })
+                }
+                
+                ToolbarItem(placement: .topBarLeading) {
+                    Text("Hello")
                 }
             }
         }
+    }
 }
 
 class UIEmojiTextField: UITextField {
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -52,7 +61,7 @@ class UIEmojiTextField: UITextField {
     }
     
     override var textInputContextIdentifier: String? {
-           return ""
+        return ""
     }
     
     override var textInputMode: UITextInputMode? {
@@ -102,7 +111,7 @@ struct EmojiTextField: UIViewRepresentable {
 }
 
 #Preview {
-    EmojiContentView()
+    Test()
 }
 
 struct EmojiContentView: View {

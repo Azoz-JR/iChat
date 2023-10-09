@@ -35,11 +35,12 @@ struct UserOnlineView: View {
                                         .offset(x: -3, y: -3)
                                 }
                                 
-                                Text(user.id.description)
+                                Text(user.name ?? "User")
                                     .font(.system(size: 10))
                                     .lineLimit(2)
                                     .foregroundColor(.primary)
                             }
+                            .frame(width: 60)
                             .padding(.leading, 5)
                         }
                     }

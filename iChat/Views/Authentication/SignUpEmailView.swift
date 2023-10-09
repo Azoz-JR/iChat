@@ -13,20 +13,19 @@ struct SignUpEmailView: View {
     @StateObject private var viewModel = SignUpEmailViewModel()
 
     @EnvironmentObject var streamViewModel: StreamViewModel
+    @Environment(\.dismiss) var dismiss
+
     
     var body: some View {
         ZStack {
-            RadialGradient(stops: [
-                .init(color: Color.primaryColor, location: 0),
-                .init(color: Color(uiColor: .systemBackground), location: 0.05)
-            ], center: .topLeading, startRadius: 200, endRadius: 205).ignoresSafeArea()
             
-            
-                
+            LoginBackground(center: .bottomTrailing)
+                            
             VStack(spacing: 20) {
                 Text ("iChat")
                     .font(.largeTitle.bold())
                     .foregroundColor(Color.primaryColor)
+                    .offset(y: -40)
                 
                 TextField("Username", text: $viewModel.username)
                     .textInputAutocapitalization(.never)
@@ -84,9 +83,22 @@ struct SignUpEmailView: View {
                                 .shadow(radius: 5)
                         }
                 }
+                
+                Button {
+                    dismiss()
+                } label: {
+                    HStack(spacing: 0) {
+                        Text("Already have an account? ")
+                            .foregroundColor(.primary)
+                        Text("Sign in")
+                            .foregroundColor(.primaryColor)
+                    }
+                }
             }
             .padding()
         }
+        .navigationTitle("Sign Up")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

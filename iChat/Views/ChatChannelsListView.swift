@@ -13,9 +13,7 @@ import SwiftUI
 struct ChatChannelsListView: View {
     
     @EnvironmentObject var streamViewModel: StreamViewModel
-    
-    @StateObject private var channelHeaderLoader = ChannelHeaderLoader()
-    
+        
     @StateObject private var chatsViewModel = ChatChannelListViewModel(channelListController: ChatClient.shared.channelListController(query: .init(filter: .and([.equal(.type, to: .messaging), .containMembers(userIds: [ChatClient.shared.currentUserId ?? ""])]), pageSize: 10)))
     
     @StateObject private var groupsViewModel = ChatChannelListViewModel(channelListController: ChatClient.shared.channelListController(query: .init(filter: .and([.equal(.type, to: .team), .containMembers(userIds: [ChatClient.shared.currentUserId ?? ""])]), pageSize: 10)))

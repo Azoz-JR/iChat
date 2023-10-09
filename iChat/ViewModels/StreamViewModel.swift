@@ -53,9 +53,11 @@ final class StreamViewModel: ObservableObject {
     @Published var isSearchBarFocused = false
     
     @AppStorage("colorScheme") var userPrefersDarkMode: Bool = false
+    
+    @Published var showForgotPasswordView = false
         
     var isSignedIn: Bool {
-        if let authUser = try? AuthenticationManager.shared.getAuthenticatedUser() {
+        if let _ = try? AuthenticationManager.shared.getAuthenticatedUser() {
             return ChatClient.shared.currentUserId != nil
         } else {
             return false
@@ -101,7 +103,9 @@ final class StreamViewModel: ObservableObject {
             }
             
             print("\(username) LOGGED IN SUCCESSFULLY!")
-            self?.showSignInView = false
+            DispatchQueue.main.async {
+                self?.showSignInView = false
+            }
         }
     }
     
@@ -116,7 +120,11 @@ final class StreamViewModel: ObservableObject {
             }
             
             print("\(userId) LOGGED IN SUCCESSFULLY!")
-            self?.showSignInView = false
+            
+            DispatchQueue.main.async {
+                self?.showSignInView = false
+            }
+            
         }
     }
         

@@ -10,12 +10,6 @@ import GoogleSignIn
 import GoogleSignInSwift
 
 
-struct GoogleSignInResultModel {
-    let idToken: String
-    let accessToken: String
-    let name: String?
-    let email: String?
-}
 
 final class SignInGoogleHelper {
     // Signs in the user with Google credentials

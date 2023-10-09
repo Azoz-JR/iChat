@@ -30,16 +30,5 @@ final class AuthenticationViewModel: ObservableObject {
         completion(user.userId, user.username)
     }
     
-//    func signInAnonymously() async throws {
-//        // Sign in the user anonymously
-//        let authDataResult = try await AuthenticationManager.shared.signInAnonymously()
-//        
-//        // Create a DBUser instance based on the authenticated data result
-//        let user = DBUser(auth: authDataResult)
-//        
-//        // Create a new user in the database
-//        try await UserManager.shared.createNewUser(user: user)
-//    }
-    
 }
 

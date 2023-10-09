@@ -48,9 +48,8 @@ struct SearchUsersResultsView: View {
     }
 }
 
-struct SearchUsersResultsVieww_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchUsersResultsView(results: [])
-            .environmentObject(StreamViewModel())
-    }
+
+#Preview {
+    SearchUsersResultsView(results: [])
+        .environmentObject(StreamViewModel())
 }
