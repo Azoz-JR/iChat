@@ -89,7 +89,8 @@ extension LoginView {
                         }
                     }
                 } catch {
-                    print("ERROR SIGNING IN WITH GOOGLE..\(error.localizedDescription)")
+                    streamViewModel.errorMsg = error.localizedDescription
+                    streamViewModel.error = true
                 }
             }
         } label: {
@@ -150,7 +151,8 @@ extension LoginView {
                             }
                         }
                     } catch {
-                        print("ERROR SIGNING IN: \(error.localizedDescription)")
+                        streamViewModel.errorMsg = error.localizedDescription
+                        streamViewModel.error = true
                     }
                 }
             } label: {

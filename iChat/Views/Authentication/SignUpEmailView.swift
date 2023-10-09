@@ -68,7 +68,8 @@ struct SignUpEmailView: View {
                                 }
                             }
                         } catch {
-                            print("ERROR SIGNING UP: \(error.localizedDescription)")
+                            streamViewModel.errorMsg = error.localizedDescription
+                            streamViewModel.error = true
                         }
                     }
                 } label: {
@@ -99,6 +100,12 @@ struct SignUpEmailView: View {
         }
         .navigationTitle("Sign Up")
         .navigationBarTitleDisplayMode(.inline)
+        .alert("ERROR SIGNNING UP...", isPresented: $streamViewModel.error) {
+            Button("OK") { }
+        } message: {
+            Text(streamViewModel.errorMsg)
+        }
+
     }
 }
 

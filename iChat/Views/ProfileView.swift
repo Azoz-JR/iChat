@@ -80,7 +80,8 @@ struct ProfileView: View {
                                 streamViewModel.showSignInView = true
                                 streamViewModel.showingProfile = false
                             } catch {
-                                print("ERROR SIGNNING OUT: \(error.localizedDescription)")
+                                streamViewModel.errorMsg = error.localizedDescription
+                                streamViewModel.error = true
                             }
                         }
                         
@@ -109,7 +110,11 @@ struct ProfileView: View {
         }
         .hLeading()
         .background(.clear)
-        
+        .alert("ERROR SIGNNING OUT...", isPresented: $streamViewModel.error) {
+            Button("OK") {}
+        } message: {
+            Text(streamViewModel.errorMsg)
+        }
     }
 }
 

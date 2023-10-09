@@ -128,7 +128,7 @@ final class StreamViewModel: ObservableObject {
         }
     }
         
-    func createGroupChannel() {
+    func createGroupChannel() throws {
         guard !newGroupUsers.isEmpty, !newGroupName.isEmpty else {
             self.errorMsg = "You have to write a group name"
             self.error.toggle()
@@ -146,36 +146,37 @@ final class StreamViewModel: ObservableObject {
         let channelId = ChannelId(type: .team, id: newGroupName)
         
         do {
-            let request = try ChatClient.shared.channelController(createChannelWithId: channelId, name: newGroupName, imageURL: nil, members: Set(members), isCurrentUserMember: true)
-                        
-            request.synchronize { [weak self] error in
-                
-                withAnimation {
-                    self?.isLoading = false
-                }
-                
-                if let error = error {
-                    self?.errorMsg = error.localizedDescription
-                    print("ERROR CREATING NEW CHANNEL : \(error.localizedDescription)")
-                    self?.error.toggle()
-                
-                    return
-                }
-                
-                //else Successful...
-                print("\(self?.newGroupName ?? "") CHANNEL CREATED SUCCESSFULLY!")
-                
-                self?.newGroupName = ""
-                self?.newGroupUsers = []
-                
-                self?.selectedChannelViewModel = ChatChannelViewModel(channelController: request)
-                
-                self?.selectedChannelController = request
-                
-                self?.showingSelectedChannel = true
+        let request = try ChatClient.shared.channelController(createChannelWithId: channelId, name: newGroupName, imageURL: nil, members: Set(members), isCurrentUserMember: true)
+        
+        request.synchronize { [weak self] error in
+            
+            withAnimation {
+                self?.isLoading = false
             }
+            
+            if let error = error {
+                self?.errorMsg = error.localizedDescription
+                print("ERROR CREATING NEW CHANNEL : \(error.localizedDescription)")
+                self?.error.toggle()
+                
+                return
+            }
+            
+            //else Successful...
+            print("\(self?.newGroupName ?? "") CHANNEL CREATED SUCCESSFULLY!")
+            
+            self?.newGroupName = ""
+            self?.newGroupUsers = []
+            
+            self?.selectedChannelViewModel = ChatChannelViewModel(channelController: request)
+            
+            self?.selectedChannelController = request
+            
+            self?.showingSelectedChannel = true
+        }
         } catch {
-            print("ERROR Creating CHANNEL: \(error.localizedDescription)")
+            self.errorMsg = error.localizedDescription
+            self.error = true
         }
     }
     
@@ -216,8 +217,8 @@ final class StreamViewModel: ObservableObject {
                 self?.showingSelectedChannel = true
             }
         } catch {
-            print("ERROR Creating Direct CHANNEL: \(error.localizedDescription)")
-            return
+            self.errorMsg = error.localizedDescription
+            self.error = true
         }
     }
     
