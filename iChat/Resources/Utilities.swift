@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 final class Utilities {
     // Shared instance of the Utilities class
@@ -41,6 +42,31 @@ final class Utilities {
         
         // Return the current controller (topmost view controller)
         return controller
+    }
+    
+    func setUpUI() {
+        let appearance = UITabBarAppearance()
+        appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+        //appearance.backgroundColor = UIColor(Color.primaryColor)
+
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+        
+        let nav = UINavigationBarAppearance()
+        nav.largeTitleTextAttributes = [.foregroundColor: UIColor(Color.primaryColor)]
+        //nav.titleTextAttributes = [.foregroundColor: UIColor(Color.primaryColor)]
+        nav.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+        //nav.backgroundColor = UIColor(Color.primaryColor)
+        
+        UINavigationBar.appearance().standardAppearance = nav
+        UINavigationBar.appearance().scrollEdgeAppearance = nav
+        
+        if let image = UIImage(systemName: "arrow.left") {
+            image.withTintColor(UIColor(.white), renderingMode: .alwaysTemplate)
+            
+            UINavigationBar.appearance().backIndicatorImage = image
+            UINavigationBar.appearance().backIndicatorTransitionMaskImage = image
+        }
     }
 }
 

@@ -21,7 +21,20 @@ public struct CustomChatChannelHeader: ToolbarContent {
     @Environment(\.dismiss) var dismiss
     
     public var body: some ToolbarContent {
-        ToolbarItem(placement: .principal) {
+        ToolbarItem(placement: .topBarLeading) {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "arrow.left")
+                    .foregroundColor(.primaryColor)
+            }
+        }
+        
+        ToolbarItem(placement: .topBarLeading) {
+            MessageAvatarView(avatarURL: channel.imageURL != nil ? channel.imageURL : channelImage())
+        }
+        
+        ToolbarItem(placement: .topBarLeading) {
             VStack(alignment: .leading, spacing: 2) {
                 Text(channelName())
                     .font(.headline)
@@ -37,23 +50,9 @@ public struct CustomChatChannelHeader: ToolbarContent {
                         .foregroundColor(.secondary)
                 }
             }
-            .hLeading()
         }
         
-        ToolbarItem(placement: .navigationBarLeading) {
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "arrow.left")
-                    .foregroundColor(.primaryColor)
-            }
-        }
-        
-        ToolbarItem(placement: .navigationBarLeading) {
-            MessageAvatarView(avatarURL: channel.imageURL != nil ? channel.imageURL : channelImage())
-        }
-        
-        ToolbarItem(placement: .navigationBarTrailing) {
+        ToolbarItem(placement: .topBarTrailing) {
             Button {
                 showingChannelInfo = true
             } label: {

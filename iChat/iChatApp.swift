@@ -20,12 +20,8 @@ struct MessengerAppApp: App {
                 .environmentObject(streamViewModel)
                 .preferredColorScheme(streamViewModel.userPrefersDarkMode ? .dark : .light)
                 .onAppear {
-                    setUpUI()
+                    Utilities.shared.setUpUI()
                 }
         }
-    }
-    
-    func setUpUI() {
-        
     }
 }
