@@ -10,27 +10,26 @@ import SwiftUI
 struct RootView: View {
     
     @EnvironmentObject var streamViewModel: StreamViewModel
-        
+            
     var body: some View {
         ZStack {
             if !streamViewModel.showSignInView {
                 ContentView()
+            } else {
+                NavigationStack {
+                    LoginView()
+                }
             }
         }
-        .onAppear {            
+        .animation(.default, value: streamViewModel.showSignInView)
+        .onAppear {
+            print("isSignedIn: \(streamViewModel.isSignedIn.description)")
             streamViewModel.showSignInView = !streamViewModel.isSignedIn
-        }
-        .fullScreenCover(isPresented: $streamViewModel.showSignInView) {
-            NavigationStack {
-                LoginView()
-            }
         }
     }
 }
 
-struct RootView_Previews: PreviewProvider {
-    static var previews: some View {
-        RootView()
-            .environmentObject(StreamViewModel())
-    }
+#Preview {
+    RootView()
+        .environmentObject(StreamViewModel())
 }

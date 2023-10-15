@@ -61,8 +61,12 @@ final class StreamViewModel: ObservableObject {
     @Published var alertMessage = ""
         
     var isSignedIn: Bool {
+        guard ChatClient.shared.currentUserId != nil else {
+            return false
+        }
+        
         if let _ = try? AuthenticationManager.shared.getAuthenticatedUser() {
-            return ChatClient.shared.currentUserId != nil
+            return true
         } else {
             return false
         }
@@ -88,8 +92,10 @@ final class StreamViewModel: ObservableObject {
     func signOut() {
         if currentUserId != nil {
             
-            ChatClient.shared.logout {
+            ChatClient.shared.logout { [weak self] in
                 print("Client Disconnected")
+                self?.showSignInView = true
+                self?.showingProfile = false
             }
         } else {
             print("ERROR LOGGING OUT")

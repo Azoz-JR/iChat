@@ -77,8 +77,6 @@ struct ProfileView: View {
                             do {
                                 try AuthenticationManager.shared.signOut()
                                 streamViewModel.signOut()
-                                streamViewModel.showSignInView = true
-                                streamViewModel.showingProfile = false
                             } catch {
                                 streamViewModel.errorMsg = error.localizedDescription
                                 streamViewModel.error = true
