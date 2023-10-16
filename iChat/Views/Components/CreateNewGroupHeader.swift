@@ -28,7 +28,7 @@ struct CreateNewGroupHeader: ToolbarContent {
                 .padding(.horizontal)
                 .frame(maxWidth: .infinity)
                 .frame(height: 40)
-                .background(Color.navigationBarColor)
+                .background(Color(.searchBar))
                 .cornerRadius(5)
                 .overlay {
                     HStack {

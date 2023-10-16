@@ -19,9 +19,6 @@ struct MessengerAppApp: App {
             RootView()
                 .environmentObject(streamViewModel)
                 .preferredColorScheme(streamViewModel.userPrefersDarkMode ? .dark : .light)
-                .onAppear {
-                    Utilities.shared.setUpUI()
-                }
         }
     }
 }

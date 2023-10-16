@@ -56,7 +56,7 @@ final class Utilities {
         nav.largeTitleTextAttributes = [.foregroundColor: UIColor(Color.primaryColor)]
         //nav.titleTextAttributes = [.foregroundColor: UIColor(Color.primaryColor)]
         nav.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
-        //nav.backgroundColor = UIColor(Color.primaryColor)
+        nav.backgroundColor = UIColor(Color.navigationBarColor)
         
         UINavigationBar.appearance().standardAppearance = nav
         UINavigationBar.appearance().scrollEdgeAppearance = nav

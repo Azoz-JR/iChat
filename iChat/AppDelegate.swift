@@ -30,6 +30,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
+        Utilities.shared.setUpUI()
+        
         ChatClient.shared = chatClient
         
         var colors = ColorPalette()

@@ -23,7 +23,6 @@ struct RootView: View {
         }
         .animation(.default, value: streamViewModel.showSignInView)
         .onAppear {
-            print("isSignedIn: \(streamViewModel.isSignedIn.description)")
             streamViewModel.showSignInView = !streamViewModel.isSignedIn
         }
     }
