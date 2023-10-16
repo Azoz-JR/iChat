@@ -37,3 +37,5 @@ iChat is a free messaging iOS application built on [Stream Chat](https://github.
 - Create a group chat
 
 ## Quick overview
+
+https://github.com/Azoz-JR/iChat/assets/77539943/51bf27a4-53b7-4797-8f20-01abe0771185
