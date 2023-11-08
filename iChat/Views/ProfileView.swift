@@ -42,7 +42,7 @@ struct ProfileView: View {
                     .padding(.horizontal)
                     
                     Button {
-                        streamViewModel.showingchangeProfilePictureSheet = true
+                        streamViewModel.showingChangeProfilePictureSheet = true
                     } label: {
                         ZStack(alignment: .bottomTrailing) {
                             MessageAvatarView(avatarURL: streamViewModel.currentUser?.imageURL, size: CGSize(width: 100, height: 100))
@@ -101,7 +101,7 @@ struct ProfileView: View {
                 .cornerRadius(20)
                 .vSpacing(.top)
                 .background(Color.navigationBarColor)
-                .sheet(isPresented: $streamViewModel.showingchangeProfilePictureSheet) {
+                .sheet(isPresented: $streamViewModel.showingChangeProfilePictureSheet) {
                     ImagePicker()
                 }
             }

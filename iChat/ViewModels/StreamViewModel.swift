@@ -18,50 +18,35 @@ extension ChatClient {
 
 @MainActor
 final class StreamViewModel: ObservableObject {
-        
-    @Published var showSignInView = false
     
-    //Error Alert Variables
+    // MARK: - Published Properties
+    
+    @Published var showSignInView = false
     @Published var error = false
     @Published var errorMsg = ""
-    
-    //Search For Users...
     @Published var showSearchUsersView = false
     @Published var searchText = ""
     @Published var searchResults: [ChatUser] = []
     @Published var suggestedUsers: [ChatUser] = []
-    
-    //Loading View State
     @Published var isLoading = false
-    
     @Published var showingProfile = false
-    
-    //Create new group channel...
     @Published var newGroupUsers: [ChatUser] = []
     @Published var newGroupName = ""
-    
-    //Open direct channel
     @Published var showingSelectedChannel = false
     @Published var selectedChannelController: ChatChannelController? = nil
     @Published var selectedChannelViewModel: ChatChannelViewModel? = nil
-    
-    //Loading Online users for the online users view
     @Published var onlineUsers: [ChatUser] = []
-    
-    @Published var showingchangeProfilePictureSheet = false
-    
+    @Published var showingChangeProfilePictureSheet = false
     @Published var isSearchBarFocused = false
-    
     @AppStorage("colorScheme") var userPrefersDarkMode: Bool = false
-    
     @Published var showForgotPasswordView = false
-    
-    //Alerts properties
     @Published var showAlert = false
-    @Published var alertMessage = ""
-        
+    
+    
+    // MARK: - Computed Properties
+    
     var isSignedIn: Bool {
-        guard ChatClient.shared.currentUserId != nil else {
+        guard let currentUserId = ChatClient.shared.currentUserId else {
             return false
         }
         
@@ -89,9 +74,10 @@ final class StreamViewModel: ObservableObject {
     }
     
     
+    // MARK: - Methods
+    
     func signOut() {
         if currentUserId != nil {
-            
             ChatClient.shared.logout { [weak self] in
                 print("Client Disconnected")
                 self?.showSignInView = true
@@ -103,9 +89,7 @@ final class StreamViewModel: ObservableObject {
     }
     
     func signUp(userId: String, username: String) {
-        
         ChatClient.shared.connectUser(userInfo: UserInfo(id: userId, name: username), token: .development(userId: userId)) { [weak self] error in
-            
             if let error = error {
                 self?.errorMsg = error.localizedDescription
                 self?.error.toggle()
@@ -119,22 +103,19 @@ final class StreamViewModel: ObservableObject {
     }
     
     func signIn(userId: String) {
-        
         ChatClient.shared.connectUser(userInfo: UserInfo(id: userId), token: .development(userId: userId)) { [weak self] error in
-            
             if let error = error {
                 self?.errorMsg = error.localizedDescription
                 self?.error.toggle()
                 return
             }
-                        
+            
             DispatchQueue.main.async {
                 self?.showSignInView = false
             }
-            
         }
     }
-        
+    
     func createGroupChannel() {
         guard !newGroupUsers.isEmpty, !newGroupName.isEmpty else {
             self.errorMsg = "You have to write a group name"
@@ -149,35 +130,37 @@ final class StreamViewModel: ObservableObject {
         let members: [String] = newGroupUsers.map { user in
             user.id.description
         }
-                
+        
         let channelId = ChannelId(type: .team, id: newGroupName)
         
         do {
-        let request = try ChatClient.shared.channelController(createChannelWithId: channelId, name: newGroupName, imageURL: nil, members: Set(members), isCurrentUserMember: true)
-        
-        request.synchronize { [weak self] error in
+            let request = try ChatClient.shared.channelController(
+                createChannelWithId: channelId,
+                name: newGroupName,
+                imageURL: nil,
+                members: Set(members),
+                isCurrentUserMember: true
+            )
             
-            withAnimation {
-                self?.isLoading = false
-            }
-            
-            if let error = error {
-                self?.errorMsg = error.localizedDescription
-                self?.error.toggle()
+            request.synchronize { [weak self] error in
+                withAnimation {
+                    self?.isLoading = false
+                }
                 
-                return
+                if let error = error {
+                    self?.errorMsg = error.localizedDescription
+                    self?.error.toggle()
+                    return
+                }
+                
+                // Successful...
+                self?.newGroupName = ""
+                self?.newGroupUsers = []
+                
+                self?.selectedChannelViewModel = ChatChannelViewModel(channelController: request)
+                self?.selectedChannelController = request
+                self?.showingSelectedChannel = true
             }
-            
-            //else Successful...            
-            self?.newGroupName = ""
-            self?.newGroupUsers = []
-            
-            self?.selectedChannelViewModel = ChatChannelViewModel(channelController: request)
-            
-            self?.selectedChannelController = request
-            
-            self?.showingSelectedChannel = true
-        }
         } catch {
             self.errorMsg = error.localizedDescription
             self.error = true
@@ -196,7 +179,12 @@ final class StreamViewModel: ObservableObject {
         }
         
         do {
-            let request = try ChatClient.shared.channelController(createDirectMessageChannelWith: Set([id]), type: .messaging, isCurrentUserMember: true, extraData: [:])
+            let request = try ChatClient.shared.channelController(
+                createDirectMessageChannelWith: Set([id]),
+                type: .messaging,
+                isCurrentUserMember: true,
+                extraData: [:]
+            )
             
             request.synchronize { [weak self] error in
                 withAnimation {
@@ -207,17 +195,14 @@ final class StreamViewModel: ObservableObject {
                     self?.errorMsg = error.localizedDescription
                     print("ERROR CREATING NEW CHANNEL : \(error.localizedDescription)")
                     self?.error.toggle()
-                    
                     return
                 }
                 
-                //else Successful...
+                // Successful...
                 print("\(id) CHANNEL CREATED SUCCESSFULLY!")
                 
                 self?.selectedChannelViewModel = ChatChannelViewModel(channelController: request)
-                
                 self?.selectedChannelController = request
-                
                 self?.showingSelectedChannel = true
             }
         } catch {
@@ -227,7 +212,6 @@ final class StreamViewModel: ObservableObject {
     }
     
     func searchUsers(searchText: String) {
-        
         let controller = ChatClient.shared.userListController(query: .init(filter: .autocomplete(.name, text: searchText), pageSize: 10))
         
         controller.synchronize { [weak self] error in
@@ -238,7 +222,7 @@ final class StreamViewModel: ObservableObject {
             
             print("SEARCHED FIRST PAGE SUCCESSFULLY")
             
-            self?.searchResults = controller.users.filter { $0.id.description != self?.currentUserId}
+            self?.searchResults = controller.users.filter { $0.id.description != self?.currentUserId }
             
             controller.loadNextUsers(limit: 10) { error in
                 if let error = error {
@@ -246,14 +230,13 @@ final class StreamViewModel: ObservableObject {
                     return
                 }
                 
-                self?.searchResults = controller.users.filter { $0.id.description != self?.currentUserId}
+                self?.searchResults = controller.users.filter { $0.id.description != self?.currentUserId }
                 print("SEARCHED SECOND PAGE SUCCESSFULLY")
             }
         }
     }
     
     func loadSuggestedResults() {
-        
         let controller = ChatClient.shared.userListController(query: .init(filter: .equal(.role, to: .user), pageSize: 10))
         
         controller.synchronize { [weak self] error in
@@ -264,7 +247,7 @@ final class StreamViewModel: ObservableObject {
             
             print("LOADED SUGGESTED USERS SUCCESSFULLY")
             
-            self?.suggestedUsers = controller.users.filter { $0.id.description != self?.currentUserId}
+            self?.suggestedUsers = controller.users.filter { $0.id.description != self?.currentUserId }
         }
     }
     
@@ -278,7 +261,7 @@ final class StreamViewModel: ObservableObject {
             }
             
             print("QUERIED FIRST PAGE SUCCESSFULLY: \(controller.users.count)")
-            self?.onlineUsers = controller.users.filter { ($0.id.description != self?.currentUserId) }
+            self?.onlineUsers = controller.users.filter { $0.id.description != self?.currentUserId }
         }
     }
     
