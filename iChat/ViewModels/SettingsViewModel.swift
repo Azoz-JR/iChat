@@ -60,7 +60,7 @@ final class SettingsViewModel: ObservableObject {
             guard let email = currentUser.email else { throw URLError(.fileDoesNotExist) }
             self.currentUserEmail = email
         } catch {
-            print("ERROR GETTING CURRENT USER: \(error.localizedDescription)")
+            
         }
     }
     
@@ -78,7 +78,6 @@ final class SettingsViewModel: ObservableObject {
     func connectAnonymousToEmail() async throws {
         // Check if email and password are not empty
         guard !email.trimmingCharacters(in: .whitespaces).isEmpty, !password.trimmingCharacters(in: .whitespaces).isEmpty else {
-            print("No Email or Password found.")
             return
         }
         

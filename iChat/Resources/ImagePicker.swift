@@ -47,10 +47,8 @@ struct ImagePicker: UIViewControllerRepresentable {
                             
                             ChatClient.shared.currentUserController().updateUserData(imageURL: path) { error in
                                 if let error = error {
-                                    print("ERROR UPDATING USER'S IMAGEURL: \(error.localizedDescription)")
                                     return
                                 }
-                                print("UPDATING imageURL: \(profileImageURL.lastPathComponent)")
                             }
                         }
                     }

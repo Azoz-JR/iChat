@@ -13,7 +13,7 @@ import SwiftUI
 struct ChatChannelsListView: View {
     
     @EnvironmentObject var streamViewModel: StreamViewModel
-        
+    
     @StateObject private var chatsViewModel = ChatChannelListViewModel(channelListController: ChatClient.shared.channelListController(query: .init(filter: .and([.equal(.type, to: .messaging), .containMembers(userIds: [ChatClient.shared.currentUserId ?? ""])]), pageSize: 10)))
     
     @StateObject private var groupsViewModel = ChatChannelListViewModel(channelListController: ChatClient.shared.channelListController(query: .init(filter: .and([.equal(.type, to: .team), .containMembers(userIds: [ChatClient.shared.currentUserId ?? ""])]), pageSize: 10)))
@@ -42,36 +42,36 @@ struct ChatChannelsListView: View {
                         .padding()
                 }
             }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        MessageAvatarView(avatarURL: streamViewModel.currentUser?.imageURL)
-                            .modifier(CircleImageModifier())
-                    }
-                    
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            withAnimation {
-                                streamViewModel.showingProfile = true
-                            }
-                        } label: {
-                            Image(systemName: "gear")
-                                .font(.title3.bold())
-                                .foregroundColor(.primaryColor)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    MessageAvatarView(avatarURL: streamViewModel.currentUser?.imageURL)
+                        .modifier(CircleImageModifier())
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        withAnimation {
+                            streamViewModel.showingProfile = true
                         }
-                    }
-                    
-                    ToolbarItem(placement: .topBarLeading) {
-                            Text(type == .messaging ? "Chats" : "Groups")
-                                .font(.title.bold())
-                                .foregroundColor(.primaryColor)
+                    } label: {
+                        Image(systemName: "gear")
+                            .font(.title3.bold())
+                            .foregroundColor(.primaryColor)
                     }
                 }
-                .navigationBarBackButtonHidden()
-                .fullScreenCover(isPresented: $streamViewModel.showSearchUsersView) {
-                    NavigationStack {
-                        SearchUsersView()
-                    }
+                
+                ToolbarItem(placement: .topBarLeading) {
+                    Text(type == .messaging ? "Chats" : "Groups")
+                        .font(.title.bold())
+                        .foregroundColor(.primaryColor)
                 }
+            }
+            .navigationBarBackButtonHidden()
+            .fullScreenCover(isPresented: $streamViewModel.showSearchUsersView) {
+                NavigationStack {
+                    SearchUsersView()
+                }
+            }
         }
         
     }

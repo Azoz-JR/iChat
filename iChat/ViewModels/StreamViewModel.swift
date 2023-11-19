@@ -77,32 +77,45 @@ final class StreamViewModel: ObservableObject {
     // MARK: - Methods
     
     func signOut() {
-        if currentUserId != nil {
-            ChatClient.shared.logout { [weak self] in
-                print("Client Disconnected")
-                self?.showSignInView = true
-                self?.showingProfile = false
-            }
-        } else {
-            print("ERROR LOGGING OUT")
+        guard currentUserId != nil else {
+            self.errorMsg = "You already signed out"
+            self.error.toggle()
+            return
+        }
+        
+        ChatClient.shared.logout { [weak self] in
+            self?.showSignInView = true
+            self?.showingProfile = false
         }
     }
     
     func signUp(userId: String, username: String) {
+        
+        withAnimation {
+            isLoading = true
+        }
+        
         ChatClient.shared.connectUser(userInfo: UserInfo(id: userId, name: username), token: .development(userId: userId)) { [weak self] error in
             if let error = error {
                 self?.errorMsg = error.localizedDescription
                 self?.error.toggle()
+                self?.isLoading = false
                 return
             }
             
             DispatchQueue.main.async {
+                self?.isLoading = false
                 self?.showSignInView = false
             }
         }
     }
     
     func signIn(userId: String) {
+        
+        withAnimation {
+            isLoading = true
+        }
+        
         ChatClient.shared.connectUser(userInfo: UserInfo(id: userId), token: .development(userId: userId)) { [weak self] error in
             if let error = error {
                 self?.errorMsg = error.localizedDescription
@@ -111,6 +124,7 @@ final class StreamViewModel: ObservableObject {
             }
             
             DispatchQueue.main.async {
+                self?.isLoading = false
                 self?.showSignInView = false
             }
         }
@@ -193,14 +207,11 @@ final class StreamViewModel: ObservableObject {
                 
                 if let error = error {
                     self?.errorMsg = error.localizedDescription
-                    print("ERROR CREATING NEW CHANNEL : \(error.localizedDescription)")
                     self?.error.toggle()
                     return
                 }
                 
                 // Successful...
-                print("\(id) CHANNEL CREATED SUCCESSFULLY!")
-                
                 self?.selectedChannelViewModel = ChatChannelViewModel(channelController: request)
                 self?.selectedChannelController = request
                 self?.showingSelectedChannel = true
@@ -216,22 +227,19 @@ final class StreamViewModel: ObservableObject {
         
         controller.synchronize { [weak self] error in
             if let error = error {
-                print("ERROR SEARCHING FOR USER: \(error.localizedDescription)")
+                self?.errorMsg = error.localizedDescription
+                self?.error.toggle()
                 return
             }
-            
-            print("SEARCHED FIRST PAGE SUCCESSFULLY")
-            
+                        
             self?.searchResults = controller.users.filter { $0.id.description != self?.currentUserId }
             
             controller.loadNextUsers(limit: 10) { error in
                 if let error = error {
-                    print("ERROR SEARCHING FOR NEXT USERS: \(error.localizedDescription)")
                     return
                 }
                 
                 self?.searchResults = controller.users.filter { $0.id.description != self?.currentUserId }
-                print("SEARCHED SECOND PAGE SUCCESSFULLY")
             }
         }
     }
@@ -241,12 +249,11 @@ final class StreamViewModel: ObservableObject {
         
         controller.synchronize { [weak self] error in
             if let error = error {
-                print("ERROR LOADING SUGGESTED USERS: \(error.localizedDescription)")
+                self?.errorMsg = error.localizedDescription
+                self?.error.toggle()
                 return
             }
-            
-            print("LOADED SUGGESTED USERS SUCCESSFULLY")
-            
+                        
             self?.suggestedUsers = controller.users.filter { $0.id.description != self?.currentUserId }
         }
     }
@@ -256,11 +263,11 @@ final class StreamViewModel: ObservableObject {
         
         controller.synchronize { [weak self] error in
             if let error = error {
-                print("ERROR QUERYING ONLINE USERS: \(error.localizedDescription)")
+                self?.errorMsg = error.localizedDescription
+                self?.error.toggle()
                 return
             }
             
-            print("QUERIED FIRST PAGE SUCCESSFULLY: \(controller.users.count)")
             self?.onlineUsers = controller.users.filter { $0.id.description != self?.currentUserId }
         }
     }

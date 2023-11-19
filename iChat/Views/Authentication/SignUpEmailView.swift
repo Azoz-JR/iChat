@@ -105,6 +105,14 @@ struct SignUpEmailView: View {
         } message: {
             Text(streamViewModel.errorMsg)
         }
+        .overlay {
+            ZStack {
+                //LOADING SCREEN...
+                if streamViewModel.isLoading {
+                    LoadingScreen()
+                }
+            }
+        }
 
     }
 }

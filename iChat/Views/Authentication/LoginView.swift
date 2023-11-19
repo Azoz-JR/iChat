@@ -68,6 +68,14 @@ struct LoginView: View {
                 ForgotPasswordView()
                     .presentationDetents([.height(300)])
             }
+            .overlay {
+                ZStack {
+                    //LOADING SCREEN...
+                    if streamViewModel.isLoading {
+                        LoadingScreen()
+                    }
+                }
+            }
         }
     }
 }

@@ -12,9 +12,6 @@ import SwiftUI
 struct SearchUsersView: View {
     
     @EnvironmentObject var streamViewModel: StreamViewModel
-    
-    var transitionEdge: AnyTransition = .move(edge: .trailing)
-    
     @FocusState private var focused: Bool
     
     var body: some View {
@@ -54,7 +51,6 @@ struct SearchUsersView: View {
         .navigationBarTitleDisplayMode(.inline)
         .scrollContentBackground(.hidden)
         .background(Color("ListBackground"))
-        .transition(transitionEdge)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {

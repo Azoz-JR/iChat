@@ -6,10 +6,13 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 @MainActor
 final class SignUpEmailViewModel: ObservableObject {
+    
+    @EnvironmentObject var streamViewModel: StreamViewModel
     
     @Published var email = ""
     @Published var password = ""
@@ -17,7 +20,8 @@ final class SignUpEmailViewModel: ObservableObject {
     
     func signUp(completion: @escaping (String, String) -> ()) async throws {
         guard !email.trimmingCharacters(in: .whitespaces).isEmpty, !password.trimmingCharacters(in: .whitespaces).isEmpty, !username.trimmingCharacters(in: .whitespaces).isEmpty else {
-            print("No Email or Password or Username found.")
+            streamViewModel.errorMsg = "You should enter Email and Password"
+            streamViewModel.error.toggle()
             return
         }
         

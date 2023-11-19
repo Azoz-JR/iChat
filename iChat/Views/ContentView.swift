@@ -11,7 +11,7 @@ import StreamChatSwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var streamViewModel: StreamViewModel
-        
+    
     var body: some View {
         ZStack {
             TabView {
@@ -41,7 +41,7 @@ struct ContentView: View {
                     LoadingScreen()
                 }
             }
-    }
+        }
     }
 }
 
