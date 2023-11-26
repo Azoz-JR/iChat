@@ -46,7 +46,7 @@ struct ImagePicker: UIViewControllerRepresentable {
                             try await self.saveImage(image: jpegData, path: path)
                             
                             ChatClient.shared.currentUserController().updateUserData(imageURL: path) { error in
-                                if let error = error {
+                                if error != nil {
                                     return
                                 }
                             }

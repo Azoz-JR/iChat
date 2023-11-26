@@ -53,7 +53,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     func connectUser(userId: String, username: String) {
         ChatClient.shared.connectUser(userInfo: UserInfo(id: userId, name: username), token: .development(userId: userId)) { error in
-            if let error = error {
+            if error != nil {
                 return
             }
         }

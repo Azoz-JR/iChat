@@ -46,7 +46,7 @@ final class StreamViewModel: ObservableObject {
     // MARK: - Computed Properties
     
     var isSignedIn: Bool {
-        guard let currentUserId = ChatClient.shared.currentUserId else {
+        guard ChatClient.shared.currentUserId != nil else {
             return false
         }
         
@@ -235,7 +235,7 @@ final class StreamViewModel: ObservableObject {
             self?.searchResults = controller.users.filter { $0.id.description != self?.currentUserId }
             
             controller.loadNextUsers(limit: 10) { error in
-                if let error = error {
+                if error != nil {
                     return
                 }
                 
