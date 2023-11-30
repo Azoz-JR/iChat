@@ -20,7 +20,7 @@ final class Utilities {
     @MainActor
     func topViewController(controller: UIViewController? = nil) -> UIViewController? {
         // If no specific controller is provided, use the root view controller of the key window
-        let controller = controller ?? UIApplication.shared.keyWindow?.rootViewController
+        let controller = controller ?? UIApplication.shared.windows.first?.rootViewController
         
         // Check if the current controller is a navigation controller
         if let navigationController = controller as? UINavigationController {
