@@ -94,3 +94,13 @@ struct ShadowModifier: ViewModifier {
             .shadow(color: .primary.opacity(0.04), radius: 5, x: -5, y: -5)
     }
 }
+
+extension DispatchQueue {
+    static func mainAsyncIfNeeded(execute work: @escaping () -> Void) {
+        if Thread.isMainThread {
+            work()
+        } else {
+            main.async(execute: work)
+        }
+    }
+}

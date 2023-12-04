@@ -16,7 +16,6 @@ extension ChatClient {
 }
 
 
-@MainActor
 final class StreamViewModel: ObservableObject {
     
     // MARK: - Published Properties
@@ -78,32 +77,33 @@ final class StreamViewModel: ObservableObject {
     
     func signOut() {
         guard currentUserId != nil else {
-            self.errorMsg = "You already signed out"
-            self.error.toggle()
+            self.showError(errorMessage: "You already signed out!")
             return
         }
         
         ChatClient.shared.logout { [weak self] in
-            self?.showSignInView = true
-            self?.showingProfile = false
+            DispatchQueue.mainAsyncIfNeeded {
+                self?.showSignInView = true
+                self?.showingProfile = false
+            }
+            
         }
     }
     
     func signUp(userId: String, username: String) {
-        
         withAnimation {
-            isLoading = true
+            self.isLoading = true
         }
         
         ChatClient.shared.connectUser(userInfo: UserInfo(id: userId, name: username), token: .development(userId: userId)) { [weak self] error in
-            if let error = error {
-                self?.errorMsg = error.localizedDescription
-                self?.error.toggle()
-                self?.isLoading = false
-                return
-            }
             
-            DispatchQueue.main.async {
+            DispatchQueue.mainAsyncIfNeeded {
+                if let error = error {
+                    self?.showError(errorMessage: error.localizedDescription)
+                    self?.isLoading = false
+                    return
+                }
+                
                 self?.isLoading = false
                 self?.showSignInView = false
             }
@@ -111,19 +111,17 @@ final class StreamViewModel: ObservableObject {
     }
     
     func signIn(userId: String) {
-        
         withAnimation {
-            isLoading = true
+            self.isLoading = true
         }
         
         ChatClient.shared.connectUser(userInfo: UserInfo(id: userId), token: .development(userId: userId)) { [weak self] error in
-            if let error = error {
-                self?.errorMsg = error.localizedDescription
-                self?.error.toggle()
-                return
-            }
-            
-            DispatchQueue.main.async {
+            DispatchQueue.mainAsyncIfNeeded {
+                if let error = error {
+                    self?.showError(errorMessage: error.localizedDescription)
+                    return
+                }
+                
                 self?.isLoading = false
                 self?.showSignInView = false
             }
@@ -132,13 +130,12 @@ final class StreamViewModel: ObservableObject {
     
     func createGroupChannel() {
         guard !newGroupUsers.isEmpty, !newGroupName.isEmpty else {
-            self.errorMsg = "You have to write a group name"
-            self.error.toggle()
+            self.showError(errorMessage: "You have to enter a name for the group.")
             return
         }
         
         withAnimation {
-            isLoading = true
+            self.isLoading = true
         }
         
         let members: [String] = newGroupUsers.map { user in
@@ -157,34 +154,35 @@ final class StreamViewModel: ObservableObject {
             )
             
             request.synchronize { [weak self] error in
-                withAnimation {
-                    self?.isLoading = false
+                DispatchQueue.mainAsyncIfNeeded {
+                    withAnimation {
+                        self?.isLoading = false
+                    }
+                    
+                    if let error = error {
+                        self?.showError(errorMessage: error.localizedDescription)
+                        return
+                    }
+                    
+                    // Successful...
+                    self?.newGroupName = ""
+                    self?.newGroupUsers = []
+                    
+                    self?.selectedChannelViewModel = ChatChannelViewModel(channelController: request)
+                    self?.selectedChannelController = request
+                    self?.showingSelectedChannel = true
                 }
-                
-                if let error = error {
-                    self?.errorMsg = error.localizedDescription
-                    self?.error.toggle()
-                    return
-                }
-                
-                // Successful...
-                self?.newGroupName = ""
-                self?.newGroupUsers = []
-                
-                self?.selectedChannelViewModel = ChatChannelViewModel(channelController: request)
-                self?.selectedChannelController = request
-                self?.showingSelectedChannel = true
             }
         } catch {
-            self.errorMsg = error.localizedDescription
-            self.error = true
+            DispatchQueue.mainAsyncIfNeeded {
+                self.showError(errorMessage: error.localizedDescription)
+            }
         }
     }
     
     func createDirectChannel(id: String) {
         guard currentUserId != nil, !id.isEmpty else {
-            self.errorMsg = "User isn't logged in"
-            self.error.toggle()
+            self.showError(errorMessage: "You aren't logged in.")
             return
         }
         
@@ -201,24 +199,26 @@ final class StreamViewModel: ObservableObject {
             )
             
             request.synchronize { [weak self] error in
-                withAnimation {
-                    self?.isLoading = false
+                DispatchQueue.mainAsyncIfNeeded {
+                    withAnimation {
+                        self?.isLoading = false
+                    }
+                    
+                    if let error = error {
+                        self?.showError(errorMessage: error.localizedDescription)
+                        return
+                    }
+                    
+                    // Successful...
+                    self?.selectedChannelViewModel = ChatChannelViewModel(channelController: request)
+                    self?.selectedChannelController = request
+                    self?.showingSelectedChannel = true
                 }
-                
-                if let error = error {
-                    self?.errorMsg = error.localizedDescription
-                    self?.error.toggle()
-                    return
-                }
-                
-                // Successful...
-                self?.selectedChannelViewModel = ChatChannelViewModel(channelController: request)
-                self?.selectedChannelController = request
-                self?.showingSelectedChannel = true
             }
         } catch {
-            self.errorMsg = error.localizedDescription
-            self.error = true
+            DispatchQueue.mainAsyncIfNeeded {
+                self.showError(errorMessage: error.localizedDescription)
+            }
         }
     }
     
@@ -226,20 +226,22 @@ final class StreamViewModel: ObservableObject {
         let controller = ChatClient.shared.userListController(query: .init(filter: .autocomplete(.name, text: searchText), pageSize: 10))
         
         controller.synchronize { [weak self] error in
-            if let error = error {
-                self?.errorMsg = error.localizedDescription
-                self?.error.toggle()
-                return
+            DispatchQueue.mainAsyncIfNeeded {
+                if let error = error {
+                    self?.showError(errorMessage: error.localizedDescription)
+                    return
+                }
+                
+                self?.searchResults = controller.users.filter { $0.id.description != self?.currentUserId }
             }
-                        
-            self?.searchResults = controller.users.filter { $0.id.description != self?.currentUserId }
             
             controller.loadNextUsers(limit: 10) { error in
                 if error != nil {
                     return
                 }
-                
-                self?.searchResults = controller.users.filter { $0.id.description != self?.currentUserId }
+                DispatchQueue.mainAsyncIfNeeded {
+                    self?.searchResults = controller.users.filter { $0.id.description != self?.currentUserId }
+                }
             }
         }
     }
@@ -248,13 +250,14 @@ final class StreamViewModel: ObservableObject {
         let controller = ChatClient.shared.userListController(query: .init(filter: .equal(.role, to: .user), pageSize: 10))
         
         controller.synchronize { [weak self] error in
-            if let error = error {
-                self?.errorMsg = error.localizedDescription
-                self?.error.toggle()
-                return
+            DispatchQueue.mainAsyncIfNeeded {
+                if let error = error {
+                    self?.showError(errorMessage: error.localizedDescription)
+                    return
+                }
+                            
+                self?.suggestedUsers = controller.users.filter { $0.id.description != self?.currentUserId }
             }
-                        
-            self?.suggestedUsers = controller.users.filter { $0.id.description != self?.currentUserId }
         }
     }
     
@@ -262,14 +265,20 @@ final class StreamViewModel: ObservableObject {
         let controller = ChatClient.shared.userListController(query: .init(pageSize: 10))
         
         controller.synchronize { [weak self] error in
-            if let error = error {
-                self?.errorMsg = error.localizedDescription
-                self?.error.toggle()
-                return
+            DispatchQueue.mainAsyncIfNeeded {
+                if let error = error {
+                    self?.showError(errorMessage: error.localizedDescription)
+                    return
+                }
+                
+                self?.onlineUsers = controller.users.filter { $0.id.description != self?.currentUserId }
             }
-            
-            self?.onlineUsers = controller.users.filter { $0.id.description != self?.currentUserId }
         }
+    }
+    
+    func showError(errorMessage: String) {
+        errorMsg = errorMessage
+        error.toggle()
     }
     
 }

@@ -170,9 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				978114B82A8A901800394DB7 /* LoginView.swift */,
-				970EE9582AC3453200E23BA2 /* SignInEmailViewModel.swift */,
 				970EE9592AC3453200E23BA2 /* SignUpEmailView.swift */,
-				970EE95A2AC3453200E23BA2 /* SignUpEmailViewModel.swift */,
 				97EF64A42AD40B1C00E739B0 /* ForgotPasswordView.swift */,
 			);
 			path = Authentication;
@@ -202,6 +200,20 @@
 				973382F52A901353003172E7 /* MessageListConfig.swift */,
 			);
 			path = CustomChatChannelComponents;
+			sourceTree = "<group>";
+		};
+		974CB1D72B1E676400CAB84D /* MainViews */ = {
+			isa = PBXGroup;
+			children = (
+				978114B72A8A901800394DB7 /* RootView.swift */,
+				978114992A8A8F0700394DB7 /* ContentView.swift */,
+				978114B62A8A901800394DB7 /* ProfileView.swift */,
+				97C0D8D02A99118200580BEB /* ChatChannelsListView.swift */,
+				97B71CA22AB9CE68009C0FA4 /* SideMenuProfileView.swift */,
+				973382F72A90F249003172E7 /* SearchUsersView.swift */,
+				97C0D8D82A9D337600580BEB /* CreateNewGroup.swift */,
+			);
+			path = MainViews;
 			sourceTree = "<group>";
 		};
 		9781148B2A8A8F0700394DB7 = {
@@ -250,15 +262,9 @@
 		978114A52A8A8F1C00394DB7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				974CB1D72B1E676400CAB84D /* MainViews */,
 				970EE9532AC3449E00E23BA2 /* Authentication */,
 				978114BE2A8A90B400394DB7 /* Components */,
-				978114B72A8A901800394DB7 /* RootView.swift */,
-				978114992A8A8F0700394DB7 /* ContentView.swift */,
-				978114B62A8A901800394DB7 /* ProfileView.swift */,
-				97C0D8D02A99118200580BEB /* ChatChannelsListView.swift */,
-				97B71CA22AB9CE68009C0FA4 /* SideMenuProfileView.swift */,
-				973382F72A90F249003172E7 /* SearchUsersView.swift */,
-				97C0D8D82A9D337600580BEB /* CreateNewGroup.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -269,6 +275,8 @@
 				978114BC2A8A903D00394DB7 /* StreamViewModel.swift */,
 				970EE95F2AC3464700E23BA2 /* AuthenticationViewModel.swift */,
 				970EE9602AC3464800E23BA2 /* SettingsViewModel.swift */,
+				970EE9582AC3453200E23BA2 /* SignInEmailViewModel.swift */,
+				970EE95A2AC3453200E23BA2 /* SignUpEmailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";

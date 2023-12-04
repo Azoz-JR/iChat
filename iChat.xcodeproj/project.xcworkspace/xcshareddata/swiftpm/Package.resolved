@@ -149,8 +149,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/GetStream/stream-chat-swiftui.git",
       "state" : {
-        "revision" : "3e6b647c5c0fb36090b83f22a8c60fff2a53f240",
-        "version" : "4.43.0"
+        "revision" : "ddb7d2b79d6dd8fa7402511f1c83c6e32d673869",
+        "version" : "4.44.0"
       }
     },
     {
