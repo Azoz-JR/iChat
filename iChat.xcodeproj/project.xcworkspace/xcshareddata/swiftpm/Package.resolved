@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk",
       "state" : {
-        "revision" : "5de0369ee79ad096c164eb3afeb7921d92a43b58",
-        "version" : "10.18.0"
+        "revision" : "c60c958e707c50a9cf8bcb7cfd7d51c566d726c5",
+        "version" : "10.19.1"
       }
     },
     {
@@ -140,8 +140,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/GetStream/stream-chat-swift.git",
       "state" : {
-        "revision" : "d642829f9ed9ad16539d9051b398abc23de61983",
-        "version" : "4.44.0"
+        "revision" : "e6079f9a463fac0f241af5d67519902401a791c5",
+        "version" : "4.45.0"
       }
     },
     {
@@ -149,8 +149,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/GetStream/stream-chat-swiftui.git",
       "state" : {
-        "revision" : "ddb7d2b79d6dd8fa7402511f1c83c6e32d673869",
-        "version" : "4.44.0"
+        "revision" : "e215f10a89b2f4da68a76545d3db0bdfe8b13e1d",
+        "version" : "4.45.0"
       }
     },
     {
