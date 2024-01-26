@@ -14,31 +14,39 @@ struct CreateNewGroupHeader: ToolbarContent {
     @Environment(\.dismiss) var dismiss
     
     var body: some ToolbarContent {
-        
-        ToolbarItem(placement: .principal) {
-            TextField("Search users", text: $streamViewModel.searchText)
-                .padding(.horizontal)
-                .frame(maxWidth: .infinity)
-                .frame(height: 40)
-                .background(Color(.searchBar))
-                .cornerRadius(5)
-                .overlay {
-                    HStack {
-                        Spacer()
-                        
-                        if !streamViewModel.searchText.isEmpty {
-                            Button {
-                                streamViewModel.searchText = ""
-                            } label: {
-                                Image(systemName: "xmark.circle")
-                                    .frame(width: 15, height: 15)
-                                    .foregroundColor(.gray)
-                                    .padding(.trailing, 8)
-                            }
-                        }
-                    }
-                }
+        ToolbarItem(placement: .navigationBarLeading) {
+            Button {
+                dismiss()
+            } label: {
+                Text("Cancel")
+                    .foregroundColor(.primaryColor)
+            }
         }
+        
+//        ToolbarItem(placement: .principal) {
+//            TextField("Search users", text: $streamViewModel.searchText)
+//                .padding(.horizontal)
+//                .frame(maxWidth: .infinity)
+//                .frame(height: 40)
+//                .background(Color(.searchBar))
+//                .cornerRadius(5)
+//                .overlay {
+//                    HStack {
+//                        Spacer()
+//                        
+//                        if !streamViewModel.searchText.isEmpty {
+//                            Button {
+//                                streamViewModel.searchText = ""
+//                            } label: {
+//                                Image(systemName: "xmark.circle")
+//                                    .frame(width: 15, height: 15)
+//                                    .foregroundColor(.gray)
+//                                    .padding(.trailing, 8)
+//                            }
+//                        }
+//                    }
+//                }
+//        }
         
         ToolbarItem(placement: .navigationBarTrailing) {
             Button {

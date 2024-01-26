@@ -67,11 +67,16 @@ struct ChatChannelsListView: View {
                 }
             }
             .navigationBarBackButtonHidden()
-            .fullScreenCover(isPresented: $streamViewModel.showSearchUsersView) {
+            .sheet(isPresented: $streamViewModel.showSearchUsersView, content: {
                 NavigationStack {
                     SearchUsersView()
                 }
-            }
+            })
+//            .fullScreenCover(isPresented: $streamViewModel.showSearchUsersView) {
+//                NavigationStack {
+//                    SearchUsersView()
+//                }
+//            }
         }
         
     }

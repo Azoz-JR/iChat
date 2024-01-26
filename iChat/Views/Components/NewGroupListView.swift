@@ -32,7 +32,6 @@ struct NewGroupListView: View {
                 HStack {
                     MessageAvatarView(avatarURL: user.imageURL)
                     
-                    
                     Text(user.name ?? "Unknown User")
                         .foregroundColor(.primary)
                         .lineLimit(1)

@@ -20,6 +20,7 @@ struct SearchBar: View, KeyboardReadable {
     
     let barColor: Color
     let prompt: String
+    let cancelButton: Bool
     
     var body: some View {
         HStack {
@@ -57,22 +58,23 @@ struct SearchBar: View, KeyboardReadable {
                 }
                 .transition(.identity)
                 .animation(.easeInOut, value: isEditing)
-            
-            if isEditing {
-                Button(action: {
-                    withAnimation(.easeInOut) {
-                        self.isEditing = false
-                        self.text = ""
-                        // Dismiss the keyboard
-                        resignFirstResponder()
+            if cancelButton {
+                if isEditing {
+                    Button(action: {
+                        withAnimation(.easeInOut) {
+                            self.isEditing = false
+                            self.text = ""
+                            // Dismiss the keyboard
+                            resignFirstResponder()
+                        }
+                    }) {
+                        Text("Cancel")
+                            .foregroundColor(colors.tintColor)
                     }
-                }) {
-                    Text("Cancel")
-                        .foregroundColor(colors.tintColor)
+                    .frame(height: 20)
+                    .padding(.trailing, 8)
+                    .transition(.move(edge: .trailing))
                 }
-                .frame(height: 20)
-                .padding(.trailing, 8)
-                .transition(.move(edge: .trailing))
             }
         }
         .onReceive(keyboardWillChangePublisher) { shown in
@@ -89,6 +91,6 @@ struct SearchBar: View, KeyboardReadable {
 
 struct SearchBar_Previews: PreviewProvider {
     static var previews: some View {
-        SearchBar(text: .constant(""), barColor: Color.gray.opacity(0.1), prompt: "Search...")
+        SearchBar(text: .constant(""), barColor: Color.gray.opacity(0.1), prompt: "Search...", cancelButton: true)
     }
 }

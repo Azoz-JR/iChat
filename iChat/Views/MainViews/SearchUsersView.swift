@@ -47,11 +47,12 @@ struct SearchUsersView: View {
                 d[.leading]
             }
         }
+        .navigationTitle("New message")
         .listStyle(.grouped)
         .navigationBarTitleDisplayMode(.inline)
         .scrollContentBackground(.hidden)
         .scrollDismissesKeyboard(.interactively)
-        .background(Color("ListBackground"))
+        //.background(Color("ListBackground"))
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
@@ -59,35 +60,9 @@ struct SearchUsersView: View {
                     streamViewModel.searchText = ""
                     streamViewModel.searchResults = []
                 } label: {
-                    Image(systemName: "arrow.left")
+                    Text("Cancel")
                         .foregroundColor(.primaryColor)
                 }
-            }
-            
-            ToolbarItem(placement: .principal) {
-                TextField("Search users", text: $streamViewModel.searchText)
-                    .focused($focused)
-                    .padding(.horizontal)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 40)
-                    .background(Color(.searchBar))
-                    .cornerRadius(5)
-                    .overlay {
-                        HStack {
-                            Spacer()
-                            
-                            if !streamViewModel.searchText.isEmpty {
-                                Button {
-                                    streamViewModel.searchText = ""
-                                } label: {
-                                    Image(systemName: "xmark.circle")
-                                        .frame(width: 15, height: 15)
-                                        .foregroundColor(.gray)
-                                        .padding(.trailing, 8)
-                                }
-                            }
-                        }
-                    }
             }
             
         }
@@ -106,6 +81,30 @@ struct SearchUsersView: View {
         } message: {
             Text(streamViewModel.errorMsg)
         }
+        .safeAreaInset(edge: .top, content: {
+            TextField("Search users", text: $streamViewModel.searchText)
+                .focused($focused)
+                .padding(.horizontal)
+                .frame(maxWidth: .infinity)
+                .frame(height: 40)
+                .background(.ultraThinMaterial)
+                .overlay {
+                    HStack {
+                        Spacer()
+                        
+                        if !streamViewModel.searchText.isEmpty {
+                            Button {
+                                streamViewModel.searchText = ""
+                            } label: {
+                                Image(systemName: "xmark.circle")
+                                    .frame(width: 15, height: 15)
+                                    .foregroundColor(.gray)
+                                    .padding(.trailing, 8)
+                            }
+                        }
+                    }
+                }
+        })
         .fullScreenCover(isPresented: $streamViewModel.showingSelectedChannel) {
             DirectChatChannelView()
         }

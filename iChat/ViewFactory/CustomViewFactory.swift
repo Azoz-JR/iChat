@@ -54,7 +54,7 @@ class CustomViewFactory: ViewFactory {
     
     func makeChannelListTopView(searchText: Binding<String>) -> some View {
         VStack(spacing: 0) {
-            SearchBar(text: searchText, barColor: Color.gray.opacity(0.2), prompt: "Search messages")
+            SearchBar(text: searchText, barColor: Color.gray.opacity(0.2), prompt: "Search messages", cancelButton: true)
                 .padding(.top, 10)
                 .padding(.horizontal, 10)
             
