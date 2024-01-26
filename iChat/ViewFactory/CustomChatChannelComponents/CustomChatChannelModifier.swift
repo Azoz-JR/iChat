@@ -39,5 +39,6 @@ struct CustomChatChannelModifier: ChatChannelHeaderViewModifier {
                         }
                 }
             }
+            .scrollDismissesKeyboard(.immediately)
     }
 }

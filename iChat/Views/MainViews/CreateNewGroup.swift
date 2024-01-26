@@ -40,7 +40,7 @@ struct CreateNewGroup: View {
             }
             .listStyle(.grouped)
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden()
+            .scrollDismissesKeyboard(.interactively)
             .scrollContentBackground(.hidden)
             .toolbar {
                 CreateNewGroupHeader()

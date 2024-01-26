@@ -14,14 +14,6 @@ struct CreateNewGroupHeader: ToolbarContent {
     @Environment(\.dismiss) var dismiss
     
     var body: some ToolbarContent {
-        ToolbarItem(placement: .navigationBarLeading) {
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "arrow.left")
-                    .foregroundColor(.primaryColor)
-            }
-        }
         
         ToolbarItem(placement: .principal) {
             TextField("Search users", text: $streamViewModel.searchText)

@@ -14,5 +14,6 @@ struct CustomChannelModifier: ChannelListHeaderViewModifier {
 
     func body(content: Content) -> some View {
         content
+            .scrollDismissesKeyboard(.interactively)
     }
 }

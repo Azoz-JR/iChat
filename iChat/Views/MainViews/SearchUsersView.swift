@@ -50,6 +50,7 @@ struct SearchUsersView: View {
         .listStyle(.grouped)
         .navigationBarTitleDisplayMode(.inline)
         .scrollContentBackground(.hidden)
+        .scrollDismissesKeyboard(.interactively)
         .background(Color("ListBackground"))
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
