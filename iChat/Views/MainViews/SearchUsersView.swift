@@ -52,7 +52,6 @@ struct SearchUsersView: View {
         .navigationBarTitleDisplayMode(.inline)
         .scrollContentBackground(.hidden)
         .scrollDismissesKeyboard(.interactively)
-        //.background(Color("ListBackground"))
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
@@ -105,7 +104,7 @@ struct SearchUsersView: View {
                     }
                 }
         })
-        .fullScreenCover(isPresented: $streamViewModel.showingSelectedChannel) {
+        .navigationDestination(isPresented: $streamViewModel.showingSelectedChannel) {
             DirectChatChannelView()
         }
         

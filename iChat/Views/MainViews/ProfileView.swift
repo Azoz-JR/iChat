@@ -7,10 +7,13 @@
 
 import StreamChatSwiftUI
 import SwiftUI
+import PhotosUI
 
 struct ProfileView: View {
     
     @EnvironmentObject var streamViewModel: StreamViewModel
+    
+    @State private var profilePiture: PhotosPickerItem? = nil
     
     
     var body: some View {
@@ -41,12 +44,12 @@ struct ProfileView: View {
                     }
                     .padding(.horizontal)
                     
-                    Button {
-                        streamViewModel.showingChangeProfilePictureSheet = true
-                    } label: {
+                    PhotosPicker(selection: $profilePiture) {
                         ZStack(alignment: .bottomTrailing) {
-                            MessageAvatarView(avatarURL: streamViewModel.currentUser?.imageURL, size: CGSize(width: 100, height: 100))
+                            Image(uiImage: streamViewModel.profilePicture)
+                                .resizable()
                                 .scaledToFill()
+                                .frame(width: 100, height: 100)
                                 .overlay {
                                     RoundedRectangle(cornerRadius: 50, style: .continuous)
                                         .stroke(Color.primaryColor.opacity(0.7), lineWidth: 7)
@@ -101,8 +104,12 @@ struct ProfileView: View {
                 .cornerRadius(20)
                 .vSpacing(.top)
                 .background(Color.navigationBarColor)
-                .sheet(isPresented: $streamViewModel.showingChangeProfilePictureSheet) {
-                    ImagePicker()
+                .onChange(of: profilePiture) { newValue in
+                    Task {
+                        if let loaded = try await profilePiture?.loadTransferable(type: Image.self), let uiImage = loaded.render() {
+                            streamViewModel.changeProfilePicture(picture: uiImage)
+                        }
+                    }
                 }
             }
         }

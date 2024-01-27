@@ -22,15 +22,6 @@ public struct CustomChatChannelHeader: ToolbarContent {
     
     public var body: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "arrow.left")
-                    .foregroundColor(.primaryColor)
-            }
-        }
-        
-        ToolbarItem(placement: .topBarLeading) {
             MessageAvatarView(avatarURL: channel.imageURL != nil ? channel.imageURL : channelImage())
         }
         

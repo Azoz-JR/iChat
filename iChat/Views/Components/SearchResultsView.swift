@@ -19,7 +19,9 @@ struct SearchUsersResultsView: View {
         ForEach(results) { user in
             Button {
                 DispatchQueue.main.async {
-                    streamViewModel.createDirectChannel(id: user.id.description)
+                    streamViewModel.createDirectChannel(id: user.id.description) {
+                        streamViewModel.showingSelectedChannel = true
+                    }
                 }
             } label: {
                 HStack {

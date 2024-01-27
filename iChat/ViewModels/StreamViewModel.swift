@@ -40,6 +40,7 @@ final class StreamViewModel: ObservableObject {
     @AppStorage("colorScheme") var userPrefersDarkMode: Bool = false
     @Published var showForgotPasswordView = false
     @Published var showAlert = false
+    @Published var profilePicture: UIImage = UIImage(systemName: "photo")!
     
     
     // MARK: - Computed Properties
@@ -62,14 +63,6 @@ final class StreamViewModel: ObservableObject {
     
     var currentUser: CurrentChatUser? {
         ChatClient.shared.currentUserController().currentUser
-    }
-    
-    var imageURL: URL? {
-        guard let fileName = currentUserId else {
-            return nil
-        }
-        
-        return FileManager.documnetsDirectory.appending(path: "\(fileName).jpg")
     }
     
     
@@ -180,7 +173,7 @@ final class StreamViewModel: ObservableObject {
         }
     }
     
-    func createDirectChannel(id: String) {
+    func createDirectChannel(id: String, completion: @escaping () -> Void) {
         guard currentUserId != nil, !id.isEmpty else {
             self.showError(errorMessage: "You aren't logged in.")
             return
@@ -212,7 +205,9 @@ final class StreamViewModel: ObservableObject {
                     // Successful...
                     self?.selectedChannelViewModel = ChatChannelViewModel(channelController: request)
                     self?.selectedChannelController = request
-                    self?.showingSelectedChannel = true
+                    DispatchQueue.mainAsyncIfNeeded {
+                        completion()
+                    }
                 }
             }
         } catch {
@@ -279,6 +274,57 @@ final class StreamViewModel: ObservableObject {
     func showError(errorMessage: String) {
         errorMsg = errorMessage
         error.toggle()
+    }
+    
+    func changeProfilePicture(picture: UIImage) {
+        guard let resizedPicture = resizeImage(image: picture, targetSize: CGSize(width: 400, height: 400)) else {
+            return
+        }
+        
+        guard let pictureData = resizedPicture.jpegData(compressionQuality: 0.8) else {
+            return
+        }
+        
+        guard let currentUserId else {
+            return
+        }
+        
+        withAnimation {
+            isLoading = true
+        }
+        
+        Task {
+            do {
+                try await UserManager.shared.updateUserProfilePicture(userId: currentUserId, picture: pictureData)
+                
+                fetchProfilePicture()
+                
+                await MainActor.run {
+                    withAnimation {
+                        isLoading = false
+                    }
+                }
+            } catch {
+                print(error.localizedDescription)
+                await MainActor.run {
+                    withAnimation {
+                        isLoading = false
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchProfilePicture() {
+        Task {
+            guard let image = await UserManager.shared.getCurrentUser()?.profileImage else {
+                return
+            }
+            
+            await MainActor.run {
+                profilePicture = image
+            }
+        }
     }
     
 }

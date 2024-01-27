@@ -65,6 +65,16 @@ extension View {
     func isSameDate(_ date1: Date, _ date2: Date) -> Bool {
         Calendar.current.isDate(date1, inSameDayAs: date2)
     }
+    
+    /// Usually you would pass  `@Environment(\.displayScale) var displayScale`
+    @MainActor func render(scale displayScale: CGFloat = 1.0) -> UIImage? {
+        let renderer = ImageRenderer(content: self)
+        
+        renderer.scale = displayScale
+        
+        return renderer.uiImage
+    }
+        
 }
 
 
@@ -113,5 +123,12 @@ extension UINavigationController: UIGestureRecognizerDelegate {
 
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return viewControllers.count > 1
+    }
+}
+
+func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
+    let renderer = UIGraphicsImageRenderer(size: targetSize)
+    return renderer.image { (context) in
+        image.draw(in: CGRect(origin: .zero, size: targetSize))
     }
 }

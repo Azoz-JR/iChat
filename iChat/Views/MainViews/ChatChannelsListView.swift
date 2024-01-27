@@ -44,7 +44,9 @@ struct ChatChannelsListView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    MessageAvatarView(avatarURL: streamViewModel.currentUser?.imageURL)
+                    Image(uiImage: streamViewModel.profilePicture)
+                        .resizable()
+                        .scaledToFill()
                         .modifier(CircleImageModifier())
                 }
                 
@@ -66,17 +68,12 @@ struct ChatChannelsListView: View {
                         .foregroundColor(.primaryColor)
                 }
             }
-            .navigationBarBackButtonHidden()
+            //.navigationBarBackButtonHidden()
             .sheet(isPresented: $streamViewModel.showSearchUsersView, content: {
                 NavigationStack {
                     SearchUsersView()
                 }
             })
-//            .fullScreenCover(isPresented: $streamViewModel.showSearchUsersView) {
-//                NavigationStack {
-//                    SearchUsersView()
-//                }
-//            }
         }
         
     }

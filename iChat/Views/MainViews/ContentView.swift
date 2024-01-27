@@ -11,6 +11,7 @@ import StreamChatSwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var streamViewModel: StreamViewModel
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ZStack {
@@ -30,9 +31,6 @@ struct ContentView: View {
         }
         .onAppear {
             streamViewModel.loadOnlineUsers()
-        }
-        .fullScreenCover(isPresented: $streamViewModel.showingSelectedChannel) {
-            DirectChatChannelView()
         }
         .overlay {
             ZStack {

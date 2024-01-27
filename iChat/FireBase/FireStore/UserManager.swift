@@ -39,6 +39,16 @@ final class UserManager {
     func createNewUser(user: DBUser) async throws {
         try userDocument(userId: user.userId).setData(from: user, merge: false)
     }
+    
+    func getCurrentUser() async -> DBUser? {
+        do {
+            let uid = try AuthenticationManager.shared.getAuthenticatedUser().uid
+            return try await userDocument(userId: uid).getDocument(as: DBUser.self)
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
         
     // Retrieves a user from the database with the given userId
     func getUser(userId: String) async throws -> DBUser {
@@ -67,6 +77,14 @@ final class UserManager {
     func removeUserPreference(userId: String, preference: String) async throws {
         let data: [String: Any] = [
             DBUser.CodingKeys.preferences.rawValue : FieldValue.arrayRemove([preference])
+        ]
+        
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
+    func updateUserProfilePicture(userId: String, picture: Data) async throws {
+        let data: [String: Any] = [
+            DBUser.CodingKeys.profilePicture.rawValue: picture
         ]
         
         try await userDocument(userId: userId).updateData(data)

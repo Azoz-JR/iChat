@@ -84,4 +84,10 @@ class CustomViewFactory: ViewFactory {
         ComposerBackgroundViewModifier()
     }
     
+    
+    
+//    func makeMessageListModifier() -> some ViewModifier {
+//        CustomMessagesListViewModifier()
+//    }
+    
 }

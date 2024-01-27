@@ -12,15 +12,22 @@ import SwiftUI
 struct UserOnlineView: View {
     
     @EnvironmentObject var streamViewModel: StreamViewModel
+    
+    @State private var showChatChannel = false
         
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
+                NavigationLink(destination: DirectChatChannelView(), isActive: $showChatChannel) {
+                    EmptyView()
+                }
                 if !streamViewModel.onlineUsers.isEmpty {
                     ForEach(streamViewModel.onlineUsers) { user in
                         Button {
                             DispatchQueue.main.async {
-                                streamViewModel.createDirectChannel(id: user.id.description)
+                                streamViewModel.createDirectChannel(id: user.id.description) {
+                                    showChatChannel = true
+                                }
                             }
                         } label: {
                             VStack(spacing: 4) {

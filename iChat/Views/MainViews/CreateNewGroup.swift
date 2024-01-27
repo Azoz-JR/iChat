@@ -72,7 +72,7 @@ struct CreateNewGroup: View {
                 }
             }
         }
-        .fullScreenCover(isPresented: $streamViewModel.showingSelectedChannel) {
+        .navigationDestination(isPresented: $streamViewModel.showingSelectedChannel) {
             DirectChatChannelView()
         }
         .alert("ERROR CREATING NEW GROUP...", isPresented: $streamViewModel.error) {

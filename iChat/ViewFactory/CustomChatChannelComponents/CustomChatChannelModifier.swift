@@ -19,7 +19,10 @@ struct CustomChatChannelModifier: ChatChannelHeaderViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .navigationBarBackButtonHidden()
+            .toolbar(.hidden, for: .tabBar)
+            .onTapGesture {
+                resignFirstResponder()
+            }
             .toolbar {
                 CustomChatChannelHeader(channel: channel, showingChannelInfo: $showingChannelInfo)
             }
@@ -39,6 +42,5 @@ struct CustomChatChannelModifier: ChatChannelHeaderViewModifier {
                         }
                 }
             }
-            .scrollDismissesKeyboard(.immediately)
     }
 }

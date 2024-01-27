@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		97068DF62B6447CA0019BD0E /* CustomMessagesListViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97068DF52B6447CA0019BD0E /* CustomMessagesListViewModifier.swift */; };
 		970C1D032B193965009BB178 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970C1D022B193965009BB178 /* LaunchScreen.swift */; };
 		970EE90F2AC33D0700E23BA2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 970EE90E2AC33D0700E23BA2 /* FirebaseAnalytics */; };
 		970EE9132AC33D0700E23BA2 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 970EE9122AC33D0700E23BA2 /* FirebaseAnalyticsSwift */; };
@@ -75,6 +76,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		97068DF52B6447CA0019BD0E /* CustomMessagesListViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMessagesListViewModifier.swift; sourceTree = "<group>"; };
 		970C1D022B193965009BB178 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		970EE94A2AC3419000E23BA2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		970EE94C2AC341F200E23BA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				9718E6822AB75D81004A213C /* CustomChatChannelModifier.swift */,
 				977FAA612AA1005C0003059C /* CustomComposerBackground.swift */,
 				973382F52A901353003172E7 /* MessageListConfig.swift */,
+				97068DF52B6447CA0019BD0E /* CustomMessagesListViewModifier.swift */,
 			);
 			path = CustomChatChannelComponents;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 			files = (
 				978114C52A8A90B400394DB7 /* SearchBar.swift in Sources */,
 				97E4600E2AB093C800B02EF9 /* FileManager-DocumentsDirectory.swift in Sources */,
+				97068DF62B6447CA0019BD0E /* CustomMessagesListViewModifier.swift in Sources */,
 				970C1D032B193965009BB178 /* LaunchScreen.swift in Sources */,
 				973382F02A8FD130003172E7 /* BackButtonDisplay.swift in Sources */,
 				978114B92A8A901800394DB7 /* ProfileView.swift in Sources */,

@@ -19,38 +19,44 @@ struct ImagePicker: UIViewControllerRepresentable {
             self.parent = parent
         }
         
-        func saveImage(image: Data?, path: URL) async throws {
-            try image?.write(to: path, options: [.atomic, .completeFileProtection])
+        func changeProfilePicture(picture: UIImage) {
+            guard let resizedPicture = resizeImage(image: picture, targetSize: CGSize(width: 400, height: 400)) else {
+                return
+            }
+            
+            guard let pictureData = resizedPicture.jpegData(compressionQuality: 0.5) else {
+                return
+            }
+            
+            guard let currentUserId = ChatClient.shared.currentUserId else {
+                return
+            }
+            
+            Task {
+                do {
+                    try await UserManager.shared.updateUserProfilePicture(userId: currentUserId, picture: pictureData)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        
+        func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
+            let renderer = UIGraphicsImageRenderer(size: targetSize)
+            return renderer.image { (context) in
+                image.draw(in: CGRect(origin: .zero, size: targetSize))
+            }
         }
         
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
             picker.dismiss(animated: true)
             
-            guard let provider = results.first?.itemProvider else {return}
+            guard let provider = results.first?.itemProvider else { return }
             
             if provider.canLoadObject(ofClass: UIImage.self) {
-                provider.loadObject(ofClass: UIImage.self) { image, _ in
+                provider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
                     if let image = image as? UIImage {
-                        
-                        guard let jpegData = image.jpegData(compressionQuality: 1.0) else {
-                            return
-                        }
-                        
-                        guard let fileName = ChatClient.shared.currentUserId else {
-                            return
-                        }
-                        
-                        let path = FileManager.documnetsDirectory.appending(path: "\(fileName).jpg")
-                        
-                        Task {
-                            try await self.saveImage(image: jpegData, path: path)
-                            
-                            ChatClient.shared.currentUserController().updateUserData(imageURL: path) { error in
-                                if error != nil {
-                                    return
-                                }
-                            }
-                        }
+                        self?.changeProfilePicture(picture: image)
                     }
                 }
             }

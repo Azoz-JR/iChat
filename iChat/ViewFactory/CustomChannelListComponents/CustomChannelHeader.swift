@@ -19,7 +19,9 @@ public struct CustomChannelHeader: ToolbarContent {
 
     public var body: some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
-            MessageAvatarView(avatarURL: streamViewModel.currentUser?.imageURL)
+            Image(uiImage: streamViewModel.profilePicture)
+                .resizable()
+                .scaledToFill()
                 .modifier(CircleImageModifier())
         }
         

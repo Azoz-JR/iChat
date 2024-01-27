@@ -5,7 +5,7 @@
 //  Created by Azoz Salah on 09/10/2023.
 //
 
-import Foundation
+import SwiftUI
 
 
 struct DBUser: Codable {
@@ -18,9 +18,10 @@ struct DBUser: Codable {
     let isPremium: Bool?
     let preferences: [String]?
     let username: String
+    let profilePicture: Data?
     
     // Initializes a DBUser instance with the provided properties
-    init(userId: String, isAnonymous: Bool? = nil, email: String? = nil, photoUrl: String? = nil, dateCreated: Date? = nil, isPremium: Bool? = nil, preferences: [String]? = nil, username: String) {
+    init(userId: String, isAnonymous: Bool? = nil, email: String? = nil, photoUrl: String? = nil, dateCreated: Date? = nil, isPremium: Bool? = nil, preferences: [String]? = nil, username: String, profilePicture: Data? = nil) {
         self.userId = userId
         self.isAnonymous = isAnonymous
         self.email = email
@@ -29,6 +30,7 @@ struct DBUser: Codable {
         self.isPremium = isPremium
         self.preferences = preferences
         self.username = username
+        self.profilePicture = profilePicture
     }
     
     // Initializes a DBUser instance from an AuthDataResultModel
@@ -41,6 +43,7 @@ struct DBUser: Codable {
         self.isPremium = false
         self.preferences = nil
         self.username = username
+        self.profilePicture = nil
     }
     
     // Specifies the coding keys for encoding and decoding
@@ -53,6 +56,7 @@ struct DBUser: Codable {
         case isPremium = "user_ispremium"
         case preferences = "preferences"
         case username = "username"
+        case profilePicture = "profile_picture"
     }
     
     // Initializes a DBUser instance by decoding data from a decoder
@@ -66,6 +70,7 @@ struct DBUser: Codable {
         self.isPremium = try container.decodeIfPresent(Bool.self, forKey: .isPremium)
         self.preferences = try container.decodeIfPresent([String].self, forKey: .preferences)
         self.username = try container.decode(String.self, forKey: .username)
+        self.profilePicture = try container.decodeIfPresent(Data.self, forKey: .profilePicture)
     }
     
     // Encodes the DBUser instance into the given encoder
@@ -79,5 +84,14 @@ struct DBUser: Codable {
         try container.encodeIfPresent(self.isPremium, forKey: .isPremium)
         try container.encodeIfPresent(self.preferences, forKey: .preferences)
         try container.encode(self.username, forKey: .username)
+        try container.encode(self.profilePicture, forKey: .profilePicture)
+    }
+    
+    var profileImage: UIImage? {
+        guard let data = profilePicture else {
+            return nil
+        }
+        
+        return UIImage(data: data)
     }
 }
