@@ -11,6 +11,8 @@ import PhotosUI
 
 struct ProfileView: View {
     
+    @Injected(\.images) var images
+    
     @EnvironmentObject var streamViewModel: StreamViewModel
     
     @State private var profilePiture: PhotosPickerItem? = nil
@@ -46,7 +48,7 @@ struct ProfileView: View {
                     
                     PhotosPicker(selection: $profilePiture) {
                         ZStack(alignment: .bottomTrailing) {
-                            Image(uiImage: streamViewModel.profilePicture)
+                            Image(uiImage: streamViewModel.profilePicture ?? images.userAvatarPlaceholder2)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 100, height: 100)

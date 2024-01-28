@@ -12,6 +12,8 @@ import SwiftUI
 
 struct ChatChannelsListView: View {
     
+    @Injected(\.images) var images
+    
     @EnvironmentObject var streamViewModel: StreamViewModel
     
     @StateObject private var chatsViewModel = ChatChannelListViewModel(channelListController: ChatClient.shared.channelListController(query: .init(filter: .and([.equal(.type, to: .messaging), .containMembers(userIds: [ChatClient.shared.currentUserId ?? ""])]), pageSize: 10)))
@@ -44,7 +46,7 @@ struct ChatChannelsListView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Image(uiImage: streamViewModel.profilePicture)
+                    Image(uiImage: streamViewModel.profilePicture ?? images.userAvatarPlaceholder2)
                         .resizable()
                         .scaledToFill()
                         .modifier(CircleImageModifier())

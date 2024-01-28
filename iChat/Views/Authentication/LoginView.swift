@@ -6,6 +6,7 @@
 //
 
 import GoogleSignInSwift
+import StreamChatSwiftUI
 import SwiftUI
 
 
@@ -75,6 +76,9 @@ struct LoginView: View {
                         LoadingScreen()
                     }
                 }
+            }
+            .onDisappear {
+                resignFirstResponder()
             }
         }
     }

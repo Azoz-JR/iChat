@@ -31,6 +31,7 @@ struct ContentView: View {
         }
         .onAppear {
             streamViewModel.loadOnlineUsers()
+            streamViewModel.fetchCurrentUserProfilePicture()
         }
         .overlay {
             ZStack {

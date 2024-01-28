@@ -40,7 +40,7 @@ final class StreamViewModel: ObservableObject {
     @AppStorage("colorScheme") var userPrefersDarkMode: Bool = false
     @Published var showForgotPasswordView = false
     @Published var showAlert = false
-    @Published var profilePicture: UIImage = UIImage(systemName: "photo")!
+    @Published var profilePicture: UIImage? = nil
     
     
     // MARK: - Computed Properties
@@ -78,6 +78,7 @@ final class StreamViewModel: ObservableObject {
             DispatchQueue.mainAsyncIfNeeded {
                 self?.showSignInView = true
                 self?.showingProfile = false
+                self?.profilePicture = nil
             }
             
         }

@@ -19,7 +19,7 @@ public struct CustomChannelHeader: ToolbarContent {
 
     public var body: some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
-            Image(uiImage: streamViewModel.profilePicture)
+            Image(uiImage: streamViewModel.profilePicture ?? images.userAvatarPlaceholder2)
                 .resizable()
                 .scaledToFill()
                 .modifier(CircleImageModifier())

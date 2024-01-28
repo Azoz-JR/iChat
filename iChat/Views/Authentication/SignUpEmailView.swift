@@ -5,6 +5,7 @@
 //  Created by Azoz Salah on 20/03/2023.
 //
 
+import StreamChatSwiftUI
 import SwiftUI
 
 
@@ -112,6 +113,9 @@ struct SignUpEmailView: View {
                     LoadingScreen()
                 }
             }
+        }
+        .onDisappear {
+            resignFirstResponder()
         }
 
     }
