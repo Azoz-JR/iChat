@@ -20,7 +20,7 @@ struct MessengerAppApp: App {
                 .environmentObject(streamViewModel)
                 .preferredColorScheme(streamViewModel.userPrefersDarkMode ? .dark : .light)
                 .onAppear {
-                    streamViewModel.fetchProfilePicture()
+                    streamViewModel.fetchCurrentUserProfilePicture()
                 }
         }
     }

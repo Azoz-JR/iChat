@@ -32,7 +32,7 @@ struct UserOnlineView: View {
                         } label: {
                             VStack(spacing: 4) {
                                 ZStack(alignment: .bottomTrailing) {
-                                    MessageAvatarView(avatarURL: user.imageURL, size: CGSize(width: 55, height: 55))
+                                    LazyImageWithProgress(userId: user.id.description, size: CGSize(width: 55, height: 55))
                                     
                                     
                                     Image(systemName: "circle.fill")

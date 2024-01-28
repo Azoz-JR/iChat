@@ -25,6 +25,14 @@ final class UserManager {
         userCollection.document(userId)
     }
     
+    private func userPicturesCollection(userId: String) -> CollectionReference {
+        userDocument(userId: userId).collection("pictures")
+    }
+    
+    private func userPictureDocument(userId: String) -> DocumentReference {
+        userPicturesCollection(userId: userId).document("profile_picture")
+    }
+    
     private let encoder: Firestore.Encoder = {
         let encoder = Firestore.Encoder()
         return encoder
@@ -82,12 +90,27 @@ final class UserManager {
         try await userDocument(userId: userId).updateData(data)
     }
     
+//    func updateUserProfilePicture(userId: String, picture: Data) async throws {
+//        let data: [String: Any] = [
+//            DBUser.CodingKeys.profilePicture.rawValue: picture
+//        ]
+//        
+//        try await userDocument(userId: userId).updateData(data)
+//    }
+    
     func updateUserProfilePicture(userId: String, picture: Data) async throws {
         let data: [String: Any] = [
-            DBUser.CodingKeys.profilePicture.rawValue: picture
+            "profile_picture": picture
         ]
         
-        try await userDocument(userId: userId).updateData(data)
+        try await userPictureDocument(userId: userId).setData(data, merge: false)
+    }
+    
+    func getUserProfilePicture(userId: String) async throws -> UIImage? {
+        guard let profilePicture = try await userPictureDocument(userId: userId).getDocument(as: ProfilePicture.self).profileImage else {
+            return nil
+        }
+        return profilePicture
     }
     
 }

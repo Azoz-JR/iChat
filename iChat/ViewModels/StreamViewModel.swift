@@ -99,6 +99,7 @@ final class StreamViewModel: ObservableObject {
                 
                 self?.isLoading = false
                 self?.showSignInView = false
+                self?.fetchCurrentUserProfilePicture()
             }
         }
     }
@@ -117,6 +118,7 @@ final class StreamViewModel: ObservableObject {
                 
                 self?.isLoading = false
                 self?.showSignInView = false
+                self?.fetchCurrentUserProfilePicture()
             }
         }
     }
@@ -277,7 +279,7 @@ final class StreamViewModel: ObservableObject {
     }
     
     func changeProfilePicture(picture: UIImage) {
-        guard let resizedPicture = resizeImage(image: picture, targetSize: CGSize(width: 400, height: 400)) else {
+        guard let resizedPicture = resizeImage(image: picture, targetSize: CGSize(width: 300, height: 300)) else {
             return
         }
         
@@ -297,7 +299,7 @@ final class StreamViewModel: ObservableObject {
             do {
                 try await UserManager.shared.updateUserProfilePicture(userId: currentUserId, picture: pictureData)
                 
-                fetchProfilePicture()
+                fetchCurrentUserProfilePicture()
                 
                 await MainActor.run {
                     withAnimation {
@@ -315,14 +317,32 @@ final class StreamViewModel: ObservableObject {
         }
     }
     
-    func fetchProfilePicture() {
+    func fetchCurrentUserProfilePicture() {
         Task {
-            guard let image = await UserManager.shared.getCurrentUser()?.profileImage else {
+            guard let userId = currentUserId, let image = try await UserManager.shared.getUserProfilePicture(userId: userId) else {
+                profilePicture = UIImage(systemName: "photo")!
                 return
             }
             
             await MainActor.run {
                 profilePicture = image
+            }
+        }
+    }
+    
+    func fetchUserPicture(userId: String, completion: @escaping (UIImage?, Error?) -> Void) {
+        Task {
+            do {
+                let picture = try await UserManager.shared.getUserProfilePicture(userId: userId)
+                
+                await MainActor.run {
+                    completion(picture, nil)
+                }
+            } catch {
+                print(error.localizedDescription)
+                await MainActor.run {
+                    completion(nil, error)
+                }
             }
         }
     }

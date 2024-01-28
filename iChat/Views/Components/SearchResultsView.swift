@@ -25,7 +25,7 @@ struct SearchUsersResultsView: View {
                 }
             } label: {
                 HStack {
-                    MessageAvatarView(avatarURL: user.imageURL)
+                    LazyImageWithProgress(userId: user.id.description, size: CGSize(width: 40, height: 40))
                     
                     VStack(alignment: .leading, spacing: 4) {
                         Text(user.name ?? "Unknown User")
