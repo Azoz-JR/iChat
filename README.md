@@ -37,5 +37,23 @@ iChat is a free messaging iOS application built on [Stream Chat](https://github.
 - Create a group chat
 
 ## Quick overview
+<p align="center">
+  <img src="https://github.com/Azoz-JR/iChat/assets/77539943/8138345d-ce5a-46d4-950f-59e34fe87baf" width="300" height="600" />
+  <img src="https://github.com/Azoz-JR/iChat/assets/77539943/9056adbf-4e92-47ab-9303-e403295a295d" width="300" height="600" />
+  <img src="https://github.com/Azoz-JR/iChat/assets/77539943/b1a2ab29-e87a-44d4-939e-b84e802b39f0" width="300" height="600" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/Azoz-JR/iChat/assets/77539943/937b943c-12db-452a-9e05-737f469992c7" width="300" height="600" />
+  <img src="https://github.com/Azoz-JR/iChat/assets/77539943/70b66be9-37a5-4550-b2b1-cf958cbc09b6" width="300" height="600" />
+  <img src="https://github.com/Azoz-JR/iChat/assets/77539943/90cc7b71-4cde-4d1a-bffe-83016ca813ff" width="300" height="600" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/Azoz-JR/iChat/assets/77539943/23996375-a9f3-4104-bf0e-dd56515ee54d" width="300" height="600" />
+  <img src="https://github.com/Azoz-JR/iChat/assets/77539943/0465e069-d9fb-4166-8197-475f8cb33081" width="300" height="600" />
+  <img src="https://github.com/Azoz-JR/iChat/assets/77539943/df53e211-5bd9-4525-8ad0-41cad9ab4a99" width="300" height="600" />
+</p>
+
 
 https://github.com/Azoz-JR/iChat/assets/77539943/51bf27a4-53b7-4797-8f20-01abe0771185
