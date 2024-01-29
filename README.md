@@ -54,9 +54,9 @@ iChat is a free messaging iOS application built on [Stream Chat](https://github.
 </p>
 
 <p align="center">
-  <img src="https://github.com/Azoz-JR/iChat/assets/77539943/23996375-a9f3-4104-bf0e-dd56515ee54d" width="300" height="600" />
-  <img src="https://github.com/Azoz-JR/iChat/assets/77539943/0465e069-d9fb-4166-8197-475f8cb33081" width="300" height="600" />
+  <img src="https://github.com/Azoz-JR/iChat/assets/77539943/b039d8dd-dfd8-4692-b11a-c8d06ed5b983" width="250" height="600" />
+  <img src="https://github.com/Azoz-JR/iChat/assets/77539943/23996375-a9f3-4104-bf0e-dd56515ee54d" width="250" height="600" />
+  <img src="https://github.com/Azoz-JR/iChat/assets/77539943/0465e069-d9fb-4166-8197-475f8cb33081" width="250" height="600" />
 </p>
-
 
 https://github.com/Azoz-JR/iChat/assets/77539943/51bf27a4-53b7-4797-8f20-01abe0771185
